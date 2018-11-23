@@ -1,0 +1,28 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~sweetalert2/src/sweetalert2';
+
+@import 'elements/card';
+@import 'elements/navbar';
+@import 'elements/buttons';
+@import 'elements/transitions';
+
+html {
+  font-size: 10pt;
+}
+
+.card-menu .card-body {
+  padding: 0;
+}
+
+td .svg-inline--fa {
+  margin: 0 0.3rem;
+
+  path {
+    fill: $secondary;
+  }
+
+  &.fa-trash path {
+    fill: $danger;
+  }
+}

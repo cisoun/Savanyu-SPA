@@ -1,0 +1,60 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~sweetalert2/src/sweetalert2';
+
+@import 'elements/buttons';
+@import 'elements/card';
+@import 'elements/navbar';
+@import 'elements/popup';
+@import 'elements/transitions';
+
+@import 'fonts';
+
+//* { border: 1px solid black }
+body {
+    background-color: #fff;
+    border: 0;
+    color: #222;
+    font-family: 'DIN Pro', sans-serif;
+    font-size: 12pt;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+
+  &:link,
+  &:visited {
+    color: $body-color;
+  }
+  &:hover {
+    color: $primary;
+    text-decoration: none;
+  }
+}
+
+a.active {
+    color: $primary;
+}
+
+.progress { background-color: $light; }
+.progress-fail { background-color: $primary; }
+
+.main-layout {
+  height: 768px;
+  margin-top: 60px;
+  transition: filter 0.5s;
+  width: 1024px;
+}
+
+.main-layout.blurred {
+    filter: blur(3px);
+}
+
+.title {
+  font-weight: 400;
+  text-transform: uppercase;
+}

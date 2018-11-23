@@ -1,0 +1,14 @@
+.card {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.card-header.with-buttons {
+  padding-bottom: 1.0rem;
+  padding-top: 1.2rem;
+
+  button {
+    float: right;
+    margin-top: -0.5rem;
+    margin-bottom: -0.5rem;
+  }
+}

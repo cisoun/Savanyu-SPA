@@ -1,0 +1,88 @@
+.popup {
+    background-color: rgba(0, 0, 0, 0.1);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.popup-content {
+    animation: SHW .5s;
+    animation-fill-mode: both;
+    background-color: #fff;
+    border: 2px solid #eee;
+    border-radius: 6px;
+    //height: 727px;
+    left: 50%;
+    margin-left: -468px;
+    padding: 50px 0 25px 0;
+    position: fixed;
+    text-align: center;
+    top: 3em;
+    width: 936px;
+}
+
+@keyframes SHW {
+    from {
+        transform:scale(0.7);
+        opacity:0
+    }
+    to {
+        transform: scale(1);
+        opacity:1
+    }
+}
+
+.popup-cross {
+    background-image: url('~/img/cross.svg');
+    height: 20px;
+    margin: 1em;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20px;
+}
+
+.popup-image {
+    height: 627px;
+    max-width: 936px;
+    padding-bottom: 25px;
+}
+
+.popup-left-arrow,
+.popup-right-arrow {
+  background-image: url('~/img/arrow.png');
+  background-size: contain;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.popup-left-arrow {
+  height: 12px;
+  transform: rotate(-90deg);
+  width: 30px;
+}
+
+.popup-right-arrow {
+  height: 12px;
+  transform: rotate(90deg);
+  width: 30px;
+}
+
+.popup-thumbnails {
+  display: inline-block;
+  height: 50px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  width: 60%;
+}
+
+.popup-thumbnails img {
+    display: inline-block;
+    height: 50px;
+    margin: 0 0.2rem;
+    width: 50px;
+}
