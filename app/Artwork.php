@@ -40,4 +40,12 @@ class Artwork extends Model
     {
         return $this->hasMany('App\Upload');
     }
+
+    /**
+     * Get the category that owns the artwork.
+     */
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
 }

@@ -1,0 +1,41 @@
+@import 'variables';
+
+.editable {
+  border: 1px solid transparent;
+  border-radius: 0.2rem;
+  min-height: 1.2rem;
+  //padding: 0.2rem 0.4rem;
+  margin: 0;
+  padding: 0;
+
+  textarea:focus,
+  input:focus {
+    border: none;
+    outline: none !important;
+    margin: 0;
+  }
+}
+
+.editable:hover {
+  border: 1px solid var(--primary);
+  box-shadow: 0 0 0 3px lighten($primary, 20%);
+}
+
+.editable-text {
+  border: 1px solid transparent;
+  border-radius: 0.2rem;
+  min-height: 1.2rem;
+  //padding: 0.2rem 0.4rem;
+
+  textarea:focus,
+  input:focus {
+    border: none;
+    outline: none !important;
+    margin: 0;
+  }
+}
+
+.editable-text:hover {
+  border: 1px solid var(--primary);
+  box-shadow: 0 0 0 3px lighten($primary, 20%);
+}

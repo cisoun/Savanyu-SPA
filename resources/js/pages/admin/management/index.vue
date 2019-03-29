@@ -30,10 +30,15 @@ export default {
     tabs () {
       return [
         {
-          icon: 'user',
+          icon: 'palette',
           name: this.$t('artworks'),
           route: 'admin.management.artworks'
         },
+        {
+          icon: 'user',
+          name: this.$t('biography'),
+          route: 'admin.management.biography'
+        }
       ]
     }
   }

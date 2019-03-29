@@ -3,6 +3,7 @@
 @import '~sweetalert2/src/sweetalert2';
 
 @import 'elements/card';
+@import 'elements/editable-text';
 @import 'elements/navbar';
 @import 'elements/buttons';
 @import 'elements/transitions';
@@ -25,4 +26,8 @@ td .svg-inline--fa {
   &.fa-trash path {
     fill: $danger;
   }
+}
+
+.nav-link svg {
+  height: 0.8em;
 }

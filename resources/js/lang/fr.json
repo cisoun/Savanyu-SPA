@@ -43,7 +43,7 @@
   "photography": "Photographie",
   "sculpture": "Sculpture",
   "video": "Vidéo",
-  "bio": "Bio",
+  "biography": "Biographie",
   "contact": "Contact",
   "instagram": "Instagram",
 
@@ -51,6 +51,9 @@
   "description": "Description",
   "text": "Texte",
   "category": "Catégorie",
+
+  "section": "Section",
+  "event": "Événement",
 
   "management": {
     "artworks": {

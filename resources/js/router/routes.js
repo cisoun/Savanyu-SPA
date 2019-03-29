@@ -5,6 +5,7 @@ const AdminAuthPasswordReset  = () => import('~/pages/admin/auth/password/reset'
 
 const AdminManagement         = () => import('~/pages/admin/management/index').then(m => m.default || m)
 const AdminManagementArtworks = () => import('~/pages/admin/management/artworks').then(m => m.default || m)
+const AdminManagementBiography = () => import('~/pages/admin/management/biography').then(m => m.default || m)
 
 const AdminSettings           = () => import('~/pages/admin/settings/index').then(m => m.default || m)
 const AdminSettingsProfile    = () => import('~/pages/admin/settings/profile').then(m => m.default || m)
@@ -17,7 +18,7 @@ const Painting = () => import('~/pages/painting').then(m => m.default || m)
 const Photography = () => import('~/pages/photography').then(m => m.default || m)
 const Sculpture = () => import('~/pages/sculpture').then(m => m.default || m)
 const Video = () => import('~/pages/video').then(m => m.default || m)
-const Bio = () => import('~/pages/bio').then(m => m.default || m)
+const Biography = () => import('~/pages/biography').then(m => m.default || m)
 const NotFound = () => import('~/pages/errors/404').then(m => m.default || m)
 
 export default [
@@ -34,7 +35,7 @@ export default [
       { path: 'video', name: 'artworks.video', component: Video },
     ]
   },
-  { path: '/bio', name: 'bio', component: Bio },
+  { path: '/biography', name: 'biography', component: Biography },
 
 
 
@@ -48,6 +49,7 @@ export default [
     children: [
       { path: '', redirect: { name: 'admin.management.artworks' } },
       { path: 'artworks', name: 'admin.management.artworks', component: AdminManagementArtworks },
+      { path: 'biography', name: 'admin.management.biography', component: AdminManagementBiography }
     ]
   },
 

@@ -2,6 +2,10 @@ import Vue from 'vue'
 
 import ArtworkModal from './admin/ArtworkModal'
 import RemoveModal from './admin/RemoveModal'
+import BiographySection from './admin/BiographySection'
+import Editable from './admin/Editable'
+import EditableText from './admin/EditableText'
+import EditableTextArea from './admin/EditableTextArea'
 
 import Button from './Button'
 import Card from './Card'
@@ -15,6 +19,10 @@ import { HasError, AlertError, AlertSuccess } from 'vform'
 [
   ArtworkModal,
   RemoveModal,
+  BiographySection,
+  Editable,
+  EditableText,
+  EditableTextArea,
   AlertError,
   AlertSuccess,
   Button,

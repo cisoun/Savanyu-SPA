@@ -7,7 +7,7 @@
       <div class="col-6">
         <div class="title">{{ item.title }}</div>
         {{ item.description }}
-        <a href="#" class="diaporama-link" @click="$parent.$parent.$emit('popup', item)">🡢 Diaporama 🡠</a>
+        <a href="#" class="diaporama-link" @click="$parent.$parent.$emit('popup', item)"><fa icon="arrow-right" class="fa-" /> Diaporama <fa icon="arrow-left" /></a>
       </div>
     </div>
 
@@ -56,5 +56,10 @@ export default {
   color: var(--primary);
   display: block;
   margin-top: 1rem;
+}
+
+.diaporama-link svg {
+  stroke: white;
+  stroke-width: 40px;
 }
 </style>
