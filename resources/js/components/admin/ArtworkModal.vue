@@ -29,10 +29,15 @@
         </select>
         <has-error :form="form" field="category_id"/>
       </div>
-      <div class="form-group">
+      <div v-if="form.category_id < 4" class="form-group">
         <label for="files">{{ $t('management.artworks.files') }}</label>
         <b-form-file id="files" v-model="form.files" :placeholder="$t('management.artworks.choose_files')" multiple></b-form-file>
         <has-error :form="form" field="files"/>
+      </div>
+      <div v-if="form.category_id == 4" class="form-group">
+        <label for="video">{{ $t('video') }}</label>
+        <input v-model="form.video" :class="{ 'is-invalid': form.errors.has('video') }" type="text" class="form-control" id="video" :placeholder="$t('management.artworks.video_url')" required>
+        <has-error :form="form" field="video"/>
       </div>
     </form>
   </b-modal>
