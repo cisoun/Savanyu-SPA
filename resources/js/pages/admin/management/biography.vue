@@ -32,18 +32,18 @@ export default {
     sections: [
       {
         id: 0,
-        title: 'Test',
+        title: 'Expositions personnelles',
         events: [
-          { date: '2012', title: 'Restauration hard mode\nLe ramoulox est réesl.' },
-          { date: '2017', title: 'La bamboula fut froide mais conscise' },
+          { date: '2012', title: 'Exposition #1' },
+          { date: '2017', title: 'Exposition #2' },
         ]
       },
       {
         id: 1,
-        title: 'La bamba',
+        title: 'Expositions collectives',
         events: [
-          { date: '2014', title: 'Jamais deux sans trois' },
-          { date: '2018', title: 'Toujours 203' },
+          { date: '2014', title: 'Exposition #1' },
+          { date: '2018', title: 'Exposition #2' },
         ]
       }
     ]
