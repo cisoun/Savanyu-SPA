@@ -19,7 +19,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   metaInfo () {
-    return { title: this.$t('sculptures') }
+    return { title: this.$t('sculpture') }
   },
 
   computed: {
