@@ -34,7 +34,7 @@ export default {
 
       return [
         this.paintings.slice(0, half),
-        this.paintings.slice(half + 1)
+        this.paintings.slice(half)
       ]
     },
 
