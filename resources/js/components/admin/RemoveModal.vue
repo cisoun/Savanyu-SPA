@@ -3,7 +3,7 @@
            :title="title"
            :cancel-title="$t('cancel')"
            :ok-title="$t('delete')"
-           @ok.prevent="confirm">
+           @ok="confirm">
     <span v-html="$t('delete_confirm', [ itemName ])"></span>
   </b-modal>
 </template>
@@ -27,7 +27,7 @@ export default {
   methods: {
     confirm () {
       this.$emit('confirm', this.item);
-      this.$refs.modal.hide();
+      //this.$refs.modal.hide();
     },
 
     show (itemName, item) {

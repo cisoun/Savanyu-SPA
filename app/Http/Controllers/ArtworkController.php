@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Requests\ArtworkRequest;
 use App\Artwork;
 use App\Upload;
+use App\Video;
 
 class ArtworkController extends Controller
 {
@@ -32,11 +34,30 @@ class ArtworkController extends Controller
 
         $artwork = Artwork::create($request->all());
 
-        foreach ($request->file('files') as $key => $file) {
-            $upload = new Upload(['path' => $file->store('public')]);
-            $artwork->uploads()->save($upload);
+        $isVideo = $request->category_id == 4;
+
+        if (!$isVideo)
+        {
+            foreach ($request->file('files') as $key => $file)
+            {
+                $upload = new Upload(['path' => $file->store('public')]);
+                $artwork->uploads()->save($upload);
+            }
         }
 
+        if ($isVideo)
+        {
+            $regex = "/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&\"'>]+)/";
+            $url = $request->input('video');
+            $matches = [];
+
+            preg_match_all($regex, $url, $matches);
+
+            $id = $matches[5][0];
+
+            $video = new Video(['url' => $id]);
+            $artwork->video()->save($video);
+        }
 
 
         /*for ($i = 0; ; $i++)

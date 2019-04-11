@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::get('/artworks', 'ArtworkController@index');
 Route::get('/categories', 'CategoryController@index');
 Route::get('/uploads', 'UploadController@index');
+Route::get('/videos', 'VideoController@index');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', 'Auth\LoginController@logout');

@@ -48,4 +48,9 @@ class Artwork extends Model
     {
         return $this->belongsTo('App\Category');
     }
+
+    public function video()
+    {
+        return $this->hasOne('App\Video');
+    }
 }

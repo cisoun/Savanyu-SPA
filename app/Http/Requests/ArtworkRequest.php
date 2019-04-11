@@ -27,7 +27,8 @@ class ArtworkRequest extends FormRequest
 
         return [
             'category_id' => 'required|alpha_num|exists:categories,id',
-            'title' => 'required|unique:artworks,title,' . $id
+            'title' => 'required|unique:artworks,title,' . $id,
+            'video' => ['required_if:category_id,==,4', 'regex:/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"\'>]+)/i']
         ];
     }
 }

@@ -16,7 +16,6 @@ class CreateBiographySectionsTable extends Migration
         Schema::create('biography_sections', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->timestamps();
         });
     }
 

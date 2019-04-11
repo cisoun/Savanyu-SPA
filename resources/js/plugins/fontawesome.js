@@ -13,6 +13,7 @@ import {
   faPalette,
   faPlus,
   faSignOutAlt,
+  faTimes,
   faTrash,
   faUser,
 } from '@fortawesome/free-solid-svg-icons'
@@ -30,6 +31,7 @@ library.add(
   faPalette,
   faPlus,
   faSignOutAlt,
+  faTimes,
   faTrash,
   faUser,
 )

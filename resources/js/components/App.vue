@@ -49,6 +49,7 @@ export default {
     await this.$store.dispatch('categories/fetch');
     await this.$store.dispatch('artworks/fetch');
     await this.$store.dispatch('uploads/fetch');
+    await this.$store.dispatch('videos/fetch');
   },
 
   mounted () {

@@ -25,7 +25,7 @@
 
           <template slot="actions" slot-scope="data">
             <a href="#" @click="edit(data.item)"><fa icon="edit" /></a>
-            <a href="#" @click="askToRemove(data.item)"><fa icon="trash" /></a>
+            <a href="#" @click="askToRemove(data.item)"><fa icon="times" /></a>
           </template>
 
         </b-table>

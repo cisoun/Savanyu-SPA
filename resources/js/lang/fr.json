@@ -64,7 +64,8 @@
       "choose_files": "Choisissez les fichiers...",
       "delete": "Supprimer une oeuvre",
       "edit": "Modifier une oeuvre",
-      "files": "Fichiers"
+      "files": "Fichiers",
+      "video_url": "URL de la vidéo..."
     },
 
     "title": "Gestion"
