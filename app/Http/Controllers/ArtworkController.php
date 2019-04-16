@@ -96,7 +96,7 @@ class ArtworkController extends Controller
     {
         $artwork = Artwork::find($id);
 
-        foreach ($artwork->uploads() as $upload)
+        foreach ($artwork->uploads as $upload)
         {
             $upload->delete();
         }

@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use Illuminate\Support\Facades\Storage;
 use App\Upload;
 
 class UploadObserver
@@ -36,8 +37,7 @@ class UploadObserver
      */
     public function deleted(Upload $upload)
     {
-        die(response()->json($upload, 422));
-        Storage::delete($upload->path);
+        //
     }
 
     /**
