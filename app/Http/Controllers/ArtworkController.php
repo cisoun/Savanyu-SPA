@@ -47,40 +47,9 @@ class ArtworkController extends Controller
 
         if ($isVideo)
         {
-            $regex = "/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&\"'>]+)/";
-            $url = $request->input('video');
-            $matches = [];
-
-            preg_match_all($regex, $url, $matches);
-
-            $id = $matches[5][0];
-
-            $video = new Video(['url' => $id]);
+            $video = new Video(['url' => $request->input('video')]);
             $artwork->video()->save($video);
         }
-
-
-        /*for ($i = 0; ; $i++)
-        {
-            $file = 'file' . $i;
-
-            if (!$request->hasFile($file))
-                break;
-
-            $fileName = sha1(time() + $i);
-            $request->file($file)->move('public/uploads', $fileName);
-
-            $upload = new Upload;
-            $upload->type = explode('/', mime_content_type('public/uploads/' . $fileName))[0];
-            $upload->name = $fileName;
-            $upload->save();
-
-            $artworkUpload = new ArtworkUpload;
-            $artworkUpload->artwork_id = $artwork->id;
-            $artworkUpload->upload_id = $upload->id;
-            $artworkUpload->index = $i;
-            $artworkUpload->save();
-        }*/
 
         return $artwork;
     }
@@ -106,6 +75,13 @@ class ArtworkController extends Controller
     public function update(ArtworkRequest $request, $id)
     {
         $artwork = Artwork::find($id);
+
+        if ($artwork->category_id == 4)
+        {
+            $video = $artwork->video;
+            $video->update(['url' => $request->input('video')]);
+        }
+
         return tap($artwork)->update($request->except('id'));
     }
 
@@ -119,9 +95,12 @@ class ArtworkController extends Controller
     public function destroy(Request $request, $id)
     {
         $artwork = Artwork::find($id);
-        foreach ($artwork->uploads() as $upload) {
+
+        foreach ($artwork->uploads() as $upload)
+        {
             $upload->delete();
         }
+
         $artwork->delete();
     }
 }

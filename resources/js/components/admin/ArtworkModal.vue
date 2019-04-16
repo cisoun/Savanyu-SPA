@@ -45,8 +45,8 @@
 
 <script>
 import Form from 'vform'
+import { showErrorsForForm } from '~/plugins/forms'
 import { mapGetters } from 'vuex'
-import { objectToFormData } from '~/plugins/forms'
 
 export default {
   name: 'ArtworkModal',
@@ -61,7 +61,8 @@ export default {
     },
 
     ...mapGetters({
-      categories: 'categories/categories'
+      categories: 'categories/categories',
+      videos: 'videos/videos'
     })
   },
 
@@ -72,7 +73,7 @@ export default {
       description: '',
       text: '',
       category_id: 1,
-      files: []
+      files: [],
     })
   }),
 
@@ -85,10 +86,19 @@ export default {
     edit (artwork) {
       this.form.id = artwork.id;
       this.form.title = artwork.title;
-      this.form.description = artwork.description;
-      this.form.text = artwork.text;
+      this.form.description = artwork.description || '';
+      this.form.text = artwork.text || '';
       this.form.category_id = artwork.category_id;
       this.form.files = artwork.files;
+      this.form.video = '';
+
+      // if (artwork.description) this.form.description = artwork.description;
+      // if (artwork.text) this.form.text = artwork.text;
+
+      const video = this.videos.find(v => v.artwork_id == artwork.id);
+      if (video) {
+        this.form.video = 'https://www.youtube.com/watch?v=' + video.url;
+      }
 
       this.$refs.modal.show();
     },
@@ -102,28 +112,17 @@ export default {
     },
 
     async store () {
-      const params = {
-        transformRequest: [function (data, headers) {
-          return objectToFormData(data)
-        }],
-        headers: { 'Content-Type': 'multipart/form-data' }
-      };
-
-      await this.form.submit('post', '/api/artwork/store', params)
-                     .then((response) => {
-                       this.$store.dispatch('artworks/store', response.data)
-                       this.close();
-                     })
-                     .catch((error) => console.error(error));
+      await this.$store.dispatch('artworks/store', this.form.data());
+      this.$refs.modal.hide();
     },
 
     async update () {
-      await this.form.patch(`/api/artwork/${this.form.id}`, { headers: {'Content-Type': 'multipart/form-data' }})
-                     .then((response) => {
-                       this.$store.dispatch('artworks/update', response);
-                       this.close();
-                     })
-                     .catch((error) = {});
+      try {
+        await this.$store.dispatch('artworks/update', this.form.data());
+        this.$refs.modal.hide()
+      } catch (e) {
+        showErrorsForForm(e, this.form);
+      }
     },
 
     show () {

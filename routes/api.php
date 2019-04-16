@@ -32,7 +32,6 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::post('store', 'ArtworkController@store');
 
         Route::delete('{id}', 'ArtworkController@destroy')->where('id', '[0-9]+');
-        Route::patch('{id}', 'ArtworkController@update')->where('id', '[0-9]+');
         Route::post('{id}', 'ArtworkController@update')->where('id', '[0-9]+');
     });
 });

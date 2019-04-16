@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { objectToFormData } from '~/plugins/forms'
 import * as types from '../mutation-types'
 
 // state
@@ -40,7 +41,7 @@ export const mutations = {
 export const actions = {
   async destroy ({ commit }, artwork) {
     try {
-      const { data } = await axios.delete(`/api/artwork/${artwork.id}`)
+      await axios.delete(`/api/artwork/${artwork.id}`);
 
       commit(types.DESTROY_ARTWORKS_SUCCESS, artwork)
     } catch (e) { }
@@ -57,10 +58,32 @@ export const actions = {
   },
 
   async store ({ commit }, artwork) {
-    commit(types.STORE_ARTWORK_SUCCESS, artwork)
+    const params = {
+      transformRequest: [function (data, headers) {
+        return objectToFormData(data)
+      }],
+      headers: { 'Content-Type': 'multipart/form-data' }
+    };
+
+    try {
+      const { data } = await axios.post('/api/artwork/store', artwork, params);
+
+      commit(types.STORE_ARTWORK_SUCCESS, data)
+    } catch (e) {
+      console.error(e);
+    }
   },
 
   async update ({ commit }, artwork) {
-    commit(types.UPDATE_ARTWORK_SUCCESS, artwork)
+    const params = {
+      transformRequest: [function (data, headers) {
+        return objectToFormData(data)
+      }],
+      headers: { 'Content-Type': 'multipart/form-data' }
+    };
+
+    const { data } = await axios.post(`/api/artwork/${artwork.id}`, artwork, params);
+
+    commit(types.UPDATE_ARTWORK_SUCCESS, data);
   },
 }

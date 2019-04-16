@@ -27,7 +27,7 @@ export default {
   methods: {
     confirm () {
       this.$emit('confirm', this.item);
-      //this.$refs.modal.hide();
+      this.$refs.modal.hide();
     },
 
     show (itemName, item) {
