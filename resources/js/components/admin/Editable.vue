@@ -1,5 +1,5 @@
 <template>
-  <div class="editable" @click="edit()">
+  <div class="editable" v-bind:class="{ 'editable-focus': editing }" @click="edit()">
     <span v-if="!editing" class="text" :class="{ 'text-muted': internalValue.isNullOrWhiteSpace() }" v-html="text" />
     <slot v-else />
   </div>
@@ -40,7 +40,7 @@ export default {
 
     changed () {
       this.blur();
-      this.$emit('changed');
+      this.$parent.$emit('changed', this.internalValue);
     },
 
     edit () {

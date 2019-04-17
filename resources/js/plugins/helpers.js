@@ -14,6 +14,18 @@ Array.prototype.any = function (value) {
 }
 
 /**
+ * Remove a given element from an array.
+ */
+Array.prototype.remove = function (item) {
+  for (let i = 0; i < this.length; i++) {
+    if (this[i] == item) {
+      this.removeAt(i);
+      return;
+    }
+  }
+}
+
+/**
  * Remove the nth index of an array.
  *
  * NOTE : Taken from C#.

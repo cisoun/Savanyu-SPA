@@ -35,7 +35,7 @@ class BiographyEventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return BiographyEvent::create($request->all());
     }
 
     /**

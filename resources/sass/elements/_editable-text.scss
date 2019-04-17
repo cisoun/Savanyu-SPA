@@ -1,41 +1,22 @@
 @import 'variables';
 
 .editable {
-  border: 1px solid transparent;
-  border-radius: 0.2rem;
-  min-height: 1.2rem;
-  //padding: 0.2rem 0.4rem;
-  margin: 0;
-  padding: 0;
-
-  textarea:focus,
-  input:focus {
-    border: none;
-    outline: none !important;
-    margin: 0;
-  }
+  border: 0;
+  //min-height: 1.2rem;
+  // margin: 0;
+  // padding: 0;
 }
 
+.editable-focus,
 .editable:hover {
-  border: 1px solid var(--primary);
-  box-shadow: 0 0 0 3px lighten($primary, 20%);
+  border-bottom: 2px solid var(--primary);
 }
 
-.editable-text {
-  border: 1px solid transparent;
-  border-radius: 0.2rem;
-  min-height: 1.2rem;
-  //padding: 0.2rem 0.4rem;
-
+.editable {
   textarea:focus,
   input:focus {
-    border: none;
-    outline: none !important;
-    margin: 0;
+    border: 0;
+    //outline: none !important;
+    //margin: 0;
   }
-}
-
-.editable-text:hover {
-  border: 1px solid var(--primary);
-  box-shadow: 0 0 0 3px lighten($primary, 20%);
 }

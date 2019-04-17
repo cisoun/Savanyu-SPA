@@ -68,6 +68,10 @@
       "video_url": "URL de la vidéo..."
     },
 
+    "biography_section": {
+      "delete": "Supprimer la section"
+    },
+
     "title": "Gestion"
   }
 }

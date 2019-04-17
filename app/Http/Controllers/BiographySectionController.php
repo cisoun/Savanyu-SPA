@@ -14,17 +14,7 @@ class BiographySectionController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return BiographySection::with('events')->get();
     }
 
     /**
@@ -35,7 +25,9 @@ class BiographySectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return BiographySection::create($request->all())
+                               ->with('events')
+                               ->first();
     }
 
     /**
@@ -78,8 +70,15 @@ class BiographySectionController extends Controller
      * @param  \App\BiographySection  $biographySection
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BiographySection $biographySection)
+    public function destroy(Request $request, $id)
     {
-        //
+        $section = BiographySection::find($id);
+
+        foreach ($section->events as $event)
+        {
+            $event->delete();
+        }
+
+        $section->delete();
     }
 }

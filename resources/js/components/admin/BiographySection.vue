@@ -3,10 +3,10 @@
     <div class="card-header with-buttons">
       <div class="row">
         <div class="col-8 col-sm-11">
-          <EditableText v-model="section.title" class="w-100" @changed="changed()" placeholder="Titre de section..."/>
+          <EditableText v-model="section.title" class="w-100" @changed="onChange" placeholder="Titre de section..."/>
         </div>
         <div class="col-4 col-sm-1">
-          <button class="btn btn-danger d-inline-block" @click="remove()"><fa icon="trash" fixed-width /></button>
+          <button class="btn btn-link d-inline-block" @click="remove()"><fa icon="times" fixed-width /></button>
         </div>
       </div>
     </div>
@@ -14,9 +14,9 @@
       <table class="table">
         <tbody>
           <tr v-for="(event, key) in section.events">
-            <td><EditableText v-model="event.date" placeholder="Année" /></td>
-            <td><EditableTextArea v-model="event.title" /></td>
-            <td><button class="btn btn-link d-inline-block" @click="removeEvent(key)"><fa icon="trash" fixed-width /></button></td>
+            <td width="20%"><EditableText v-model="event.date" placeholder="Année" @changed="onEventChange(event)" /></td>
+            <td width="70%"><EditableTextArea v-model="event.title" @changed="onEventChange(event)" /></td>
+            <td width="10%" class="text-right"><button class="btn btn-link d-inline-block" @click="removeEvent(key)"><fa icon="times" fixed-width /></button></td>
           </tr>
         </tbody>
       </table>
@@ -41,16 +41,27 @@ export default {
 
   methods: {
     add () {
-      console.log(this.section);
-      this.section.events.push({ date: '2019', title: 'test' })
+      const event = {
+        id: 0,
+        biography_section_id: this.section.id,
+        date: String(new Date().getFullYear()),
+        title: this.$t('event'),
+        section: this.section
+      };
+      this.section.events.push(event);
+      this.$emit('event-create', event);
     },
 
-    changed () {
-      console.log('changed');
+    onChange (property, value) {
+      this.$emit('change', property, value);
+    },
+
+    onEventChange (event) {
+      this.$emit('event-change', event);
     },
 
     async remove () {
-
+      this.$emit('remove');
     },
 
     async removeEvent (event) {

@@ -13,7 +13,6 @@ class Upload extends Model
      * @var array
      */
     protected $fillable = [
-        'id',
         'artwork_id',
         //'type',
         'path',

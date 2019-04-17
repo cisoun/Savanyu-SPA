@@ -26,7 +26,6 @@ export default [
 
   { path: '/artworks',
     name: 'artworks',
-    redirect: '/artworks/painting',
     component: Works,
     children: [
       { path: 'painting', name: 'artworks.painting', component: Painting },
@@ -35,7 +34,7 @@ export default [
       { path: 'video', name: 'artworks.video', component: Video },
     ]
   },
-  { path: '/biography', name: 'biography', component: Biography },
+  { path: '/bio', name: 'bio', component: Biography },
 
 
 

@@ -34,6 +34,26 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::delete('{id}', 'ArtworkController@destroy')->where('id', '[0-9]+');
         Route::post('{id}', 'ArtworkController@update')->where('id', '[0-9]+');
     });
+
+    Route::prefix('biography')->group(function () {
+        Route::prefix('event')->group(function () {
+            Route::get('index', 'BiographyEventController@index');
+            Route::post('store', 'BiographyEventController@store');
+
+            Route::delete('{id}', 'BiographyEventController@destroy')->where('id', '[0-9]+');
+            Route::patch('{id}', 'BiographyEventController@update')->where('id', '[0-9]+');
+            Route::post('{id}', 'BiographyEventController@update')->where('id', '[0-9]+');
+        });
+
+        Route::prefix('section')->group(function () {
+            Route::get('index', 'BiographySectionController@index');
+            Route::post('store', 'BiographySectionController@store');
+
+            Route::delete('{id}', 'BiographySectionController@destroy')->where('id', '[0-9]+');
+            Route::patch('{id}', 'BiographySectionController@update')->where('id', '[0-9]+');
+            Route::post('{id}', 'BiographySectionController@update')->where('id', '[0-9]+');
+        });
+    });
 });
 
 Route::group(['middleware' => 'guest:api'], function () {

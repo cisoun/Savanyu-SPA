@@ -15,11 +15,11 @@ class CreateBiographyEventsTable extends Migration
     {
         Schema::create('biography_events', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('section_id');
+            $table->unsignedInteger('biography_section_id');
             $table->string('title');
             $table->string('date');
 
-            $table->foreign('section_id')
+            $table->foreign('biography_section_id')
                   ->references('id')
                   ->on('biography_sections')
                   ->onDelete('cascade');
