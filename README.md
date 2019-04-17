@@ -4,6 +4,7 @@ Don't mind this repository.
 ## Setup
 
 ```bash
+composer update
 php artisan key:generate
 php artisan jwt:secret
 npm install
@@ -16,4 +17,10 @@ php artisan storage:link
 ```bash
 php artisan serve
 npm run watch
+```
+
+## Update
+
+```bash
+composer dump-autoload # If some errors occure.
 ```
