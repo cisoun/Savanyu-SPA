@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BiographyEvent;
 use App\BiographySection;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,16 @@ class BiographySectionController extends Controller
      */
     public function store(Request $request)
     {
-        return BiographySection::create($request->all())->load('events');
+        $event = [
+            'title' => __('ui.new_event'),
+            'date'  => date('Y')
+        ];
+
+        $section = BiographySection::create($request->all());
+        $event   = new BiographyEvent($event);
+        $section->events()->save($event);
+        return $section->load('events');
+
     }
 
     /**
