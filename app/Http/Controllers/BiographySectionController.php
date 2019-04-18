@@ -25,9 +25,7 @@ class BiographySectionController extends Controller
      */
     public function store(Request $request)
     {
-        return BiographySection::create($request->all())
-                               ->with('events')
-                               ->first();
+        return BiographySection::create($request->all())->load('events');
     }
 
     /**
