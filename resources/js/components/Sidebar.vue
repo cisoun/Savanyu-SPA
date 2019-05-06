@@ -10,8 +10,8 @@
     </ul>
     <router-link :to="{ name: 'bio' }" class="nav-link menu-primary" active-class="active">{{ $t('bio') }}</router-link>
     <div class="icons">
-      <a href="#" class="icon icon-instagram">{{ $t('instagram') }}</a>
-      <a href="#" class="icon icon-contact">{{ $t('contact') }}</a>
+      <a href="instagram.com/victorsavanyusanchez/" class="icon icon-instagram">{{ $t('instagram') }}</a>
+      <a href="mail://mail@savanyu.ch" class="icon icon-contact">{{ $t('contact') }}</a>
     </div>
     <a class="menu-primary" href="#">Victor Savanyu</a>
   </div>
