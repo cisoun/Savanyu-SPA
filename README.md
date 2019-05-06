@@ -10,6 +10,7 @@ php artisan jwt:secret
 npm install
 touch database/savanyu.db
 php artisan migrate
+php artisan db:seed
 php artisan storage:link
 ```
 
