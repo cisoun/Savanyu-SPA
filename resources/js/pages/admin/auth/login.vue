@@ -83,7 +83,7 @@ export default {
       await this.$store.dispatch('auth/fetchUser')
 
       // Redirect home.
-      this.$router.push({ name: 'admin.home' })
+      this.$router.push({ name: 'admin.management.artworks' })
     }
   }
 }
