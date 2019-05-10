@@ -20,3 +20,12 @@ $primary: #e74c3c;
 $secondary: #7f8c8d;
 $success: #27ae60;
 $light: #bdc3c7;
+$dark: #333;
+
+html {
+  --primary: $primary;
+  --secondary: $secondary;
+  --success: $success;
+  --light: $light;
+  --dark: #333;
+}

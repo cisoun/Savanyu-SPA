@@ -29,15 +29,28 @@
         </select>
         <has-error :form="form" field="category_id"/>
       </div>
-      <div v-if="form.category_id < 4" class="form-group">
+      <div v-if="!isvideo" class="form-group">
         <label for="files">{{ $t('management.artworks.files') }}</label>
         <b-form-file id="files" v-model="form.files" :placeholder="$t('management.artworks.choose_files')" multiple></b-form-file>
         <has-error :form="form" field="files"/>
       </div>
-      <div v-if="form.category_id == 4" class="form-group">
+      <div v-if="isvideo" class="form-group">
         <label for="video">{{ $t('video') }}</label>
         <input v-model="form.video" :class="{ 'is-invalid': form.errors.has('video') }" type="text" class="form-control" id="video" :placeholder="$t('management.artworks.video_url')" required>
         <has-error :form="form" field="video"/>
+      </div>
+
+      <!--ul class="list-group">
+        <draggable v-model="files" @start="drag=true" @end="drag=false">
+            <li v-for="file in files" :key="file.id" class="list-group-item"><fa icon="bars" class="handler" /><img :src="file.url" class="img-thumbnail" /></li>
+        </draggable>
+      </ul-->
+
+      <div v-if="!isvideo" class="card thumbnails">
+        <div v-for="(file, index) in files" :key="file.id" class="thumbnail" :style="`background-image:url(${file.url})`">
+          <div class="thumbnail-mask"></div>
+          <fa icon="times" @click="removeFile(file)"/>
+        </div>
       </div>
     </form>
   </b-modal>
@@ -47,9 +60,14 @@
 import Form from 'vform'
 import { showErrorsForForm } from '~/plugins/forms'
 import { mapGetters } from 'vuex'
+import draggable from 'vuedraggable'
 
 export default {
   name: 'ArtworkModal',
+
+  components: {
+    draggable,
+  },
 
   props: {
     title: { type: String, required: false }
@@ -60,13 +78,27 @@ export default {
       return this.form.id == 0;
     },
 
+    isvideo () {
+      return this.form.category_id == 4;
+    },
+
+    thumbnailsColumns () {
+      return 4;
+    },
+
+    thumbnailsRows () {
+      return Math.ceil(this.files.length / this.thumbnailsColumns);
+    },
+
     ...mapGetters({
       categories: 'categories/categories',
+      uploads: 'uploads/uploads',
       videos: 'videos/videos'
     })
   },
 
   data: () => ({
+    files: [],
     form: new Form({
       id: 0,
       title: '',
@@ -92,15 +124,26 @@ export default {
       this.form.files = artwork.files;
       this.form.video = '';
 
-      // if (artwork.description) this.form.description = artwork.description;
-      // if (artwork.text) this.form.text = artwork.text;
 
       const video = this.videos.find(v => v.artwork_id == artwork.id);
       if (video) {
         this.form.video = 'https://www.youtube.com/watch?v=' + video.url;
+      } else {
+        this.files = this.uploads.filter(u => u.artwork_id == artwork.id);
+        console.log(this.files);
       }
 
       this.$refs.modal.show();
+    },
+
+    getThumbnailsForRow (row) {
+      const start = this.thumbnailsRows * row;
+      const end = start + this.thumbnailsColumns;
+      return this.files.slice(start, end);
+    },
+
+    removeFile (file) {
+      //await this.à$store.dispatch('uploads/')
     },
 
     async save () {
@@ -132,3 +175,67 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.thumbnails {
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-column-gap: 0.3rem;
+  grid-row-gap: 0.3rem;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+}
+
+.thumbnails::before {
+  content: '';
+  width: 0;
+  padding-bottom: 100%;
+  grid-row: 1 / 1;
+  grid-column: 1 / 1;
+}
+
+.thumbnails > *:first-child {
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
+}
+
+.thumbnail {
+  background-position: center;
+  background-size: cover;
+}
+
+.thumbnail-mask {
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s;
+  width: 100%;
+  height:100%;
+}
+
+.thumbnail:hover .thumbnail-mask {
+  opacity: 1;
+}
+
+.thumbnail svg {
+  color: white;
+  cursor: pointer;
+  display: none;
+  font-size: 5rem;
+  height: 5rem;
+  left: 50%;
+  margin-left: -2.5rem;
+  margin-top: -2.5rem;
+  padding: 1rem;
+  position: relative;
+  top: -50%;
+  width: 5rem;
+}
+
+.thumbnail:hover svg {
+  display: block;
+}
+
+.handler { margin-right: 2rem; }
+.list-group-item img {
+  height: 2rem;
+}
+</style>
