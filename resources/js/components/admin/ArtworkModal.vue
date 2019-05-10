@@ -60,13 +60,13 @@
 import Form from 'vform'
 import { showErrorsForForm } from '~/plugins/forms'
 import { mapGetters } from 'vuex'
-import draggable from 'vuedraggable'
+//import draggable from 'vuedraggable'
 
 export default {
   name: 'ArtworkModal',
 
   components: {
-    draggable,
+    //draggable,
   },
 
   props: {
