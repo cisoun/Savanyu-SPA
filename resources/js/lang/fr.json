@@ -7,7 +7,7 @@
 
   "actions": "Actions",
   "confirm_password": "Confirm Password",
-  "delete_confirm": "Voulez-vous vraiment supprimer <b>{0}</b> ?",
+  "delete_confirm": "Veux-tu vraiment supprimer <b>{0}</b> ?",
   "email": "Email",
   "error_alert_text": "Something went wrong! Please try again.",
   "error_alert_title": "Oops...",
@@ -65,6 +65,8 @@
       "delete": "Supprimer une oeuvre",
       "edit": "Modifier une oeuvre",
       "files": "Fichiers",
+      "files_delete": "Suppression",
+      "files_delete_confirm": "Veux-tu vraiment supprimer ce fichier ?",
       "video_url": "URL de la vidéo..."
     },
 

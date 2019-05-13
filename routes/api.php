@@ -35,6 +35,10 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::post('{id}', 'ArtworkController@update')->where('id', '[0-9]+');
     });
 
+    Route::prefix('upload')->group(function () {
+        Route::delete('{id}', 'UploadController@destroy')->where('id', '[0-9]+');
+    });
+
     Route::prefix('biography')->group(function () {
         Route::prefix('event')->group(function () {
             Route::get('index', 'BiographyEventController@index');

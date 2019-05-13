@@ -46,8 +46,9 @@ class UploadController extends Controller
      * @param  \App\Upload  $upload
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Upload $upload)
+    public function destroy(Request $request, $id)
     {
-        //
+        $upload = Upload::find($id);
+        return tap($upload)->delete();
     }
 }

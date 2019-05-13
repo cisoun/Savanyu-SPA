@@ -29,12 +29,12 @@
         </select>
         <has-error :form="form" field="category_id"/>
       </div>
-      <div v-if="!isvideo" class="form-group">
+      <div v-if="!isVideo" class="form-group">
         <label for="files">{{ $t('management.artworks.files') }}</label>
         <b-form-file id="files" v-model="form.files" :placeholder="$t('management.artworks.choose_files')" multiple></b-form-file>
         <has-error :form="form" field="files"/>
       </div>
-      <div v-if="isvideo" class="form-group">
+      <div v-if="isVideo" class="form-group">
         <label for="video">{{ $t('video') }}</label>
         <input v-model="form.video" :class="{ 'is-invalid': form.errors.has('video') }" type="text" class="form-control" id="video" :placeholder="$t('management.artworks.video_url')" required>
         <has-error :form="form" field="video"/>
@@ -46,10 +46,10 @@
         </draggable>
       </ul-->
 
-      <div v-if="!isvideo" class="card thumbnails">
+      <div v-if="!isVideo" class="card thumbnails">
         <div v-for="(file, index) in files" :key="file.id" class="thumbnail" :style="`background-image:url(${file.url})`">
           <div class="thumbnail-mask"></div>
-          <fa icon="times" @click="removeFile(file)"/>
+          <fa icon="times" @click="removeFile(file)"  data-toggle="modal" data-target="#exampleModal"/>
         </div>
       </div>
     </form>
@@ -78,7 +78,7 @@ export default {
       return this.form.id == 0;
     },
 
-    isvideo () {
+    isVideo () {
       return this.form.category_id == 4;
     },
 
@@ -90,6 +90,10 @@ export default {
       return Math.ceil(this.files.length / this.thumbnailsColumns);
     },
 
+    files () {
+      return this.uploads.filter(u => u.artwork_id == this.form.id);
+    },
+
     ...mapGetters({
       categories: 'categories/categories',
       uploads: 'uploads/uploads',
@@ -98,7 +102,7 @@ export default {
   },
 
   data: () => ({
-    files: [],
+    //files: [],
     form: new Form({
       id: 0,
       title: '',
@@ -129,8 +133,7 @@ export default {
       if (video) {
         this.form.video = 'https://www.youtube.com/watch?v=' + video.url;
       } else {
-        this.files = this.uploads.filter(u => u.artwork_id == artwork.id);
-        console.log(this.files);
+        //this.files = this.uploads.filter(u => u.artwork_id == artwork.id);
       }
 
       this.$refs.modal.show();
@@ -142,8 +145,26 @@ export default {
       return this.files.slice(start, end);
     },
 
-    removeFile (file) {
+    async  removeFile (upload) {
+      //this.$refs.removeModal.show();
       //await this.à$store.dispatch('uploads/')
+      await this.$bvModal.msgBoxConfirm(this.$t('management.artworks.files_delete_confirm'), {
+        title: this.$t('management.artworks.files_delete'),
+        okVariant: 'danger',
+        okTitle: this.$t('delete'),
+        cancelTitle: this.$t('cancel'),
+        footerClass: 'p-2',
+        hideHeaderClose: false,
+        centered: true
+      })
+      .then(async value => {
+        if (value) {
+          await this.$store.dispatch('uploads/destroy', upload);
+        }
+      })
+      .catch(err => {
+        console.log("Nope");
+      })
     },
 
     async save () {
