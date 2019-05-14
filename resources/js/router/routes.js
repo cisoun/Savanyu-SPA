@@ -6,6 +6,7 @@ const AdminAuthPasswordReset  = () => import('~/pages/admin/auth/password/reset'
 const AdminManagement         = () => import('~/pages/admin/management/index').then(m => m.default || m)
 const AdminManagementArtworks = () => import('~/pages/admin/management/artworks').then(m => m.default || m)
 const AdminManagementBiography = () => import('~/pages/admin/management/biography').then(m => m.default || m)
+const AdminManagementWelcome  = () => import('~/pages/admin/management/welcome').then(m => m.default || m)
 
 const AdminSettings           = () => import('~/pages/admin/settings/index').then(m => m.default || m)
 const AdminSettingsProfile    = () => import('~/pages/admin/settings/profile').then(m => m.default || m)
@@ -38,7 +39,7 @@ export default [
 
 
 
-  { path: '/admin', name: 'admin.home', component: AdminHome },
+  { path: '/admin', redirect: { name: 'admin.management.artworks' } },
   { path: '/admin/login', name: 'admin.login', component: AdminAuthLogin },
   { path: '/admin/password/reset', name: 'admin.password.request', component: AdminAuthPasswordEmail },
   { path: '/admin/password/reset/:token', name: 'admin.password.reset', component: AdminAuthPasswordReset },
@@ -48,7 +49,8 @@ export default [
     children: [
       { path: '', redirect: { name: 'admin.management.artworks' } },
       { path: 'artworks', name: 'admin.management.artworks', component: AdminManagementArtworks },
-      { path: 'biography', name: 'admin.management.biography', component: AdminManagementBiography }
+      { path: 'biography', name: 'admin.management.biography', component: AdminManagementBiography },
+      { path: 'welcome', name: 'admin.management.welcome', component: AdminManagementWelcome }
     ]
   },
 

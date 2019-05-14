@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container">
-      <router-link :to="{ name: user ? 'admin.home' : 'welcome' }" class="navbar-brand">
+      <router-link :to="{ name: user ? 'admin.management.artworks' : 'welcome' }" class="navbar-brand">
         {{ appName }}
       </router-link>
 
@@ -11,13 +11,14 @@
 
       <div id="navbarToggler" class="collapse navbar-collapse">
         <ul class="navbar-nav">
-          <locale-dropdown/>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li> -->
+          <li class="nav-item">
+            <a href="/" class="nav-link">Retour au site</a>
+          </li>
+
         </ul>
 
         <ul class="navbar-nav ml-auto">
+          <locale-dropdown/>
           <!-- Authenticated -->
           <li v-if="user" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark"
