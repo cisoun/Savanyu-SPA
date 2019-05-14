@@ -5,11 +5,11 @@
       <img class="popup-image" :src="currentImage ? currentImage.url : ''" />
 
       <div v-if="showThumbnails">
-        <a class="popup-left-arrow" href="#" @click.stop="scrollLeft()"></a>
-        <div class="popup-thumbnails" ref="thumbnails">
+        <a class="popup-left-arrow" :class="{invisible: !showLeftArrow}" href="#" @click.stop="scrollLeft()"></a>
+        <div class="popup-thumbnails" ref="thumbnails" @scroll="updateArrows()">
           <img v-for="image in images" :src="image.url" @mouseover="showImage(image)" />
         </div>
-        <a class="popup-right-arrow" href="#" @click.stop="scrollRight()"></a>
+        <a class="popup-right-arrow" :class="{invisible: !showRightArrow}" href="#" @click.stop="scrollRight()"></a>
       </div>
 
     </div>
@@ -24,6 +24,8 @@ export default {
   data: () => ({
     currentImage: null,
     images: [],
+    showLeftArrow: false,
+    showRightArrow: true,
     visible: false,
   }),
 
@@ -40,6 +42,7 @@ export default {
 
   methods: {
     close () {
+      this.$refs.thumbnails.scrollLeft = 0;
       this.$emit('closing');
       this.visible = false;
     },
@@ -53,18 +56,27 @@ export default {
     },
 
     show (artwork) {
-      this.$emit('showing');
-      this.visible = true;
       this.images = this.uploads.filter(upload => upload.artwork_id == artwork.id);
 
       if (this.images.length > 0) {
         this.currentImage = this.images[0];
       }
+
+      this.$emit('showing');
+      this.visible = true;
+
+      this.$nextTick(() => this.updateArrows());
     },
 
     showImage (image) {
       this.currentImage = image;
-    }
+    },
+
+    updateArrows () {
+      const thumbnails = this.$refs.thumbnails;
+      this.showLeftArrow = thumbnails.scrollLeft > 0;
+      this.showRightArrow = thumbnails.scrollLeft < thumbnails.scrollWidth - thumbnails.clientWidth;
+    },
   }
 }
 </script>

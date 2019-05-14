@@ -54,7 +54,7 @@ export default {
   width: 770px;
   height: 700px;
   overflow-y: scroll;
-  padding-right: 30px;
+  padding-right: 32px;
   scroll-behavior: smooth;
 }
 
