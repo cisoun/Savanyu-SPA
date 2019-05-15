@@ -34,7 +34,7 @@
         <b-form-file id="files" v-model="form.files" :placeholder="$t('management.artworks.choose_files')" multiple></b-form-file>
         <has-error :form="form" field="files"/>
       </div>
-      <div v-if="isVideo" class="form-group">
+      <div v-if="hasVideo" class="form-group">
         <label for="video">{{ $t('video') }}</label>
         <input v-model="form.video" :class="{ 'is-invalid': form.errors.has('video') }" type="text" class="form-control" id="video" :placeholder="$t('management.artworks.video_url')" required>
         <has-error :form="form" field="video"/>
@@ -46,7 +46,7 @@
         </draggable>
       </ul-->
 
-      <div v-if="!isVideo" class="card thumbnails">
+      <div v-if="!isVideo && hasFiles" class="card thumbnails">
         <div v-for="(file, index) in files" :key="file.id" class="thumbnail" :style="`background-image:url(${file.url})`">
           <div class="thumbnail-mask"></div>
           <fa icon="times" @click="removeFile(file)"  data-toggle="modal" data-target="#exampleModal"/>
@@ -74,6 +74,14 @@ export default {
   },
 
   computed: {
+    hasFiles () {
+      return this.files.length > 0;
+    },
+
+    hasVideo () {
+      return this.form.category_id > 2;
+    },
+
     isNew () {
       return this.form.id == 0;
     },
