@@ -12,8 +12,20 @@ html {
   font-size: 10pt;
 }
 
+body {
+  background-color: #f6f6f6;
+}
+
+.card {
+  box-shadow: 0 5px 10px #f0f0f0;
+}
+
 .card-menu .card-body {
   padding: 0;
+}
+
+.table-striped tbody tr:nth-of-type(2n+1) {
+  background-color: #f6f6f6;
 }
 
 td .svg-inline--fa {
@@ -30,4 +42,10 @@ td .svg-inline--fa {
 
 .nav-link svg {
   height: 0.8em;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  background-color: #fff;
+  border-bottom-color: #fff;
 }
