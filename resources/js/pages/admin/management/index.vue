@@ -30,6 +30,11 @@ export default {
     tabs () {
       return [
         {
+          icon: 'home',
+          name: this.$t('welcome'),
+          route: 'admin.management.welcome'
+        },
+        {
           icon: 'palette',
           name: this.$t('artworks'),
           route: 'admin.management.artworks'

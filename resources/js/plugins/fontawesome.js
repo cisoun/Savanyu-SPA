@@ -7,8 +7,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
   faArrowLeft,
   faArrowRight,
+  //faBars,
   faCog,
   faEdit,
+  faHome,
   faLock,
   faPalette,
   faPlus,
@@ -25,8 +27,10 @@ import {
 library.add(
   faArrowLeft,
   faArrowRight,
+  //faBars,
   faCog,
   faEdit,
+  faHome,
   faLock,
   faPalette,
   faPlus,
