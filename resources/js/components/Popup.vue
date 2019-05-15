@@ -4,7 +4,7 @@
       <a href="#" class="popup-cross popup-close" @click="close()"></a>
       <img class="popup-image" :src="currentImage ? currentImage.url : ''" />
 
-      <div v-if="showThumbnails">
+      <div :class="{'d-none': !showThumbnails}">
         <a class="popup-left-arrow" :class="{invisible: !showLeftArrow}" href="#" @click.stop="scrollLeft()"></a>
         <div class="popup-thumbnails" ref="thumbnails" @scroll="updateArrows()">
           <img v-for="image in images" :src="image.url" @mouseover="showImage(image)" />
