@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
       <router-link :to="{ name: user ? 'admin.management.artworks' : 'welcome' }" class="navbar-brand">
         {{ appName }}
@@ -10,20 +10,18 @@
       </button>
 
       <div id="navbarToggler" class="collapse navbar-collapse">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a href="/" class="nav-link">Retour au site</a>
+            <a href="/" class="nav-link"><fa icon="globe" /> Retour au site</a>
           </li>
 
-        </ul>
-
-        <ul class="navbar-nav ml-auto">
           <locale-dropdown/>
+
           <!-- Authenticated -->
           <li v-if="user" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark"
                href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{ user.name }}
+              <fa icon="user" /> {{ user.name }}
             </a>
             <div class="dropdown-menu">
               <router-link :to="{ name: 'admin.management.artworks' }" class="dropdown-item pl-3">

@@ -18,12 +18,52 @@ html {
 
 body {
   background-color: #f6f6f6;
+  padding-bottom: 3rem;
 }
+
+@media (min-width: 768px) {
+  .dropdown-menu:after, .dropdown-menu:before {
+  	bottom: 100%;
+  	left: 50%;
+  	border: solid transparent;
+  	content: " ";
+  	height: 0;
+  	width: 0;
+  	position: absolute;
+  	pointer-events: none;
+  }
+
+  .dropdown-menu:after {
+  	border-color: transparent;
+  	border-bottom-color: white;
+  	border-width: 0.8rem;
+  	margin-left: -0.8rem;
+  }
+}
+
+.navbar .nav-link { color: rgba(255, 255, 255, 0.8) !important; }
+.navbar .navbar-brand,
+.navbar .nav-link:hover,
+.navbar .nav-link:focus { color: rgba(255, 255, 255, 1) !important; }
+
+.nav-link svg { height: 1.2rem; }
+
+.navbar .nav-item { padding-left: 1rem; }
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  background-color: #fff;
+  border-bottom-color: #fff;
+}
+
+.nav-tabs a { color: var(--fg-color); }
 
 .card {
   border-color: var(--border-color);
   box-shadow: 0 5px 10px #eee;
 }
+
+.card .card { box-shadow: none, }
 
 .card-header {
   border-bottom-color: var(--border-color);
@@ -48,15 +88,3 @@ td .svg-inline--fa {
     fill: $danger;
   }
 }
-
-.nav-link svg {
-  height: 0.8em;
-}
-
-.nav-tabs .nav-link.active,
-.nav-tabs .nav-item.show .nav-link {
-  background-color: #fff;
-  border-bottom-color: #fff;
-}
-
-.nav-tabs a { color: var(--fg-color); }
