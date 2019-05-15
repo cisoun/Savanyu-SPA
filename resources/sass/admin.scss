@@ -9,6 +9,10 @@
 @import 'elements/transitions';
 
 html {
+  --border-color: #e6e6e6;
+  --fg-color: #333;
+
+  color: var(--fg-color);
   font-size: 10pt;
 }
 
@@ -17,7 +21,12 @@ body {
 }
 
 .card {
-  box-shadow: 0 5px 10px #f0f0f0;
+  border-color: var(--border-color);
+  box-shadow: 0 5px 10px #eee;
+}
+
+.card-header {
+  border-bottom-color: var(--border-color);
 }
 
 .card-menu .card-body {
@@ -49,3 +58,5 @@ td .svg-inline--fa {
   background-color: #fff;
   border-bottom-color: #fff;
 }
+
+.nav-tabs a { color: var(--fg-color); }
