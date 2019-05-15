@@ -12,7 +12,7 @@
       <div id="navbarToggler" class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a href="/" class="nav-link"><fa icon="globe" /> Retour au site</a>
+            <a href="/" class="nav-link"><fa icon="globe" fixed-width /> Retour au site</a>
           </li>
 
           <locale-dropdown/>
@@ -21,7 +21,7 @@
           <li v-if="user" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark"
                href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <fa icon="user" /> {{ user.name }}
+              <fa icon="user" fixed-width /> {{ user.name }}
             </a>
             <div class="dropdown-menu">
               <router-link :to="{ name: 'admin.management.artworks' }" class="dropdown-item pl-3">
