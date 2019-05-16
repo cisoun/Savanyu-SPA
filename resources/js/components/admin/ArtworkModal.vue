@@ -153,9 +153,7 @@ export default {
       return this.files.slice(start, end);
     },
 
-    async  removeFile (upload) {
-      //this.$refs.removeModal.show();
-      //await this.à$store.dispatch('uploads/')
+    async removeFile (upload) {
       await this.$bvModal.msgBoxConfirm(this.$t('management.artworks.files_delete_confirm'), {
         title: this.$t('management.artworks.files_delete'),
         okVariant: 'danger',
@@ -169,10 +167,7 @@ export default {
         if (value) {
           await this.$store.dispatch('uploads/destroy', upload);
         }
-      })
-      .catch(err => {
-        console.log("Nope");
-      })
+      });
     },
 
     async save () {

@@ -17,6 +17,7 @@ Route::get('/artworks', 'ArtworkController@index');
 Route::get('/categories', 'CategoryController@index');
 Route::get('/uploads', 'UploadController@index');
 Route::get('/videos', 'VideoController@index');
+Route::get('/welcome', 'WelcomeController@index');
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', 'Auth\LoginController@logout');
@@ -24,6 +25,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+    Route::post('/welcome', 'WelcomeController@update');
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');
     Route::patch('settings/password', 'Settings\PasswordController@update');
