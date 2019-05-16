@@ -1,6 +1,20 @@
+$primary: #e74c3c;
+$secondary: #666;
+$success: #2ecc71;
+$light: #ddd;
+$dark: #333;
+
+html {
+  --primary: $primary;
+  --secondary: $secondary;
+  --success: $success;
+  --light: $light;
+  --dark: $dark;
+}
+
 // // Body
 $body-bg: #fff;
-$body-color: #333;
+$body-color: $dark;
 
 // Cards
 $card-spacer-x: 0.9375rem;
@@ -16,19 +30,16 @@ $border-radius-sm: .15rem;
 // Nav Pills
 $nav-pills-border-radius: 0;
 
-$primary: #e74c3c;
-$secondary: #666;
-$success: #27ae60;
-$light: #bdc3c7;
-$dark: #333;
+// Links
+$link-color: $primary !default;
+$link-hover-color: darken($link-color, 15%) !default;
+$link-hover-decoration: underline !default;
 
-html {
-  --primary: $primary;
-  --secondary: $secondary;
-  --success: $success;
-  --light: $light;
-  --dark: #333;
-}
+// Dropdown
+$dropdown-link-color: $body-color !default;
+$dropdown-link-hover-color: #fff !default;
+$dropdown-link-hover-bg: $primary !default;
+
 $custom-file-text: (
   en: "Browse",
   es: "Elegir",
