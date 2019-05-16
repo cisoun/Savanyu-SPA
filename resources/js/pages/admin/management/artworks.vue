@@ -10,6 +10,7 @@
 
           <template slot="HEAD_title" slot-scope="data">{{ $t(data.label) }}</template>
           <template slot="HEAD_category_id" slot-scope="data">{{ $t(data.label) }}</template>
+          <template slot="HEAD_actions" slot-scope="data">{{ $t(data.label) }}</template>
 
           <template slot="id" slot-scope="data">
             {{ data.item.id }}
@@ -63,7 +64,7 @@ export default {
         { key: 'id', label: '#', sortable: true },
         { key: 'title', label: 'title', sortable: true },
         { key: 'category_id', label: 'category', sortable: true },
-        { key: 'actions', label: 'actions', sortable: true },
+        { key: 'actions', label: 'actions', sortable: false },
       ],
   }),
 
