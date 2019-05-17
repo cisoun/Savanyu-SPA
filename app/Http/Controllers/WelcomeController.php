@@ -30,7 +30,7 @@ class WelcomeController extends Controller
 
         if ($request->hasFile('image'))
         {
-            $request->file->storeAs('public', self::FILENAME);
+            $request->image->storeAs('public', self::FILENAME);
         }
         else
         {
