@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
-    <img :src="`${image}`" alt="Image" />
-    <p class="mt-3" v-html="format(text)"></p>
+    <img v-if="image" :src="`${image}`" alt="Image" />
+    <p v-if="text" class="mt-3" v-html="format(text)"></p>
   </div>
 </template>
 
