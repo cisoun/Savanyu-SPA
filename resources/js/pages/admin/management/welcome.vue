@@ -24,13 +24,19 @@
 
 <script>
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
-  layout: 'admin',
   middleware: 'auth',
 
   metaInfo () {
     return { title: this.$t('welcome') }
+  },
+
+  computed: {
+    ...mapGetters({
+      image: 'welcome/image',
+    }),
   },
 
   data: () => ({
@@ -38,6 +44,11 @@ export default {
     file: null,
     text: ''
   }),
+
+  async mounted () {
+    await this.$store.dispatch('welcome/fetch');
+    this.text = this.$store.getters['welcome/text'];
+  },
 
   methods: {
     onFileChange () {
@@ -47,21 +58,10 @@ export default {
     async save () {
       this.busy = true;
 
-      const formData = new FormData();
-      formData.append('file', this.$refs.image.files[0]);
-      formData.append('text', this.text);
-
-      await axios.post( '/api/welcome', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(() => {
-
-      }).catch(() => {
-
-      }).finally(() => {
-        this.busy = false;
-      });
+      this.$store.dispatch('welcome/update', {
+        file: this.$refs.image.files[0],
+        text: this.text
+      }).then(() => this.busy = false);
     }
   }
 }

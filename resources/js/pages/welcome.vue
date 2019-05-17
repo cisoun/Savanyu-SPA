@@ -1,23 +1,8 @@
 <template>
-  <div id="container">
-            <div id="menu">
-                <a id="menu-works" href="">Travaux</a>
-                <ul id="menu-works-list">
-                    <li><a href="">Peinture</a></li>
-                    <li><a href="">Photographie</a></li>
-                    <li><a href="">Sculpture</a></li>
-                    <li><a href="">Vidéo</a></li>
-                </ul>
-                <a id="menu-bio" href="">Bio</a>
-                <p class="space"></p>
-                <a id="menu-instagram" href="#" class="icon icon-instagram">Instagram</a>
-                <a id="menu-contact" href="#" class="icon icon-contact">Contact</a>
-                <a id="menu-title" href="">Victor Savanyu</a>
-            </div>
-            <div id="content">
-
-            </div>
-        </div>
+  <div class="text-center">
+    <img :src="`${image}`" alt="Image" />
+    <p class="mt-3" v-html="format(text)"></p>
+  </div>
 </template>
 
 <script>
@@ -30,8 +15,22 @@ export default {
     return { title: this.$t('home') }
   },
 
-  data: () => ({
-    title: window.config.appName
-  }),
+  computed: {
+    ...mapGetters({
+      image: 'welcome/image',
+      text: 'welcome/text'
+    })
+  },
+
+  mounted () {
+    this.$store.dispatch('welcome/fetch');
+  },
+
+  methods: {
+    format (text) {
+      return text.replace(/\*\*([^(?=\*\*)]+)\*\*/gi, '<b>$1</b>')
+                 .replace('\r\n', '<br/>');
+    }
+  }
 }
 </script>

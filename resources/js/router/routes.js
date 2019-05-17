@@ -28,7 +28,9 @@ export default [
   { path: '/artworks',
     name: 'artworks',
     component: Works,
+    redirect: { name: 'artworks.welcome' },
     children: [
+      { path: '', name: 'artworks.welcome', component: Welcome },
       { path: 'painting', name: 'artworks.painting', component: Painting },
       { path: 'photography', name: 'artworks.photography', component: Photography },
       { path: 'sculpture', name: 'artworks.sculpture', component: Sculpture },
@@ -36,8 +38,6 @@ export default [
     ]
   },
   { path: '/bio', name: 'bio', component: Biography },
-
-
 
   { path: '/admin', redirect: { name: 'admin.management.artworks' } },
   { path: '/admin/login', name: 'admin.login', component: AdminAuthLogin },

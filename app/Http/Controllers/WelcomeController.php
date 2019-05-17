@@ -20,7 +20,7 @@ class WelcomeController extends Controller
     {
         return array(
             'text' => $text,
-            'file' => Storage::url(self::FILENAME)
+            'image' => Storage::url(self::FILENAME)
         );
     }
 
@@ -28,7 +28,7 @@ class WelcomeController extends Controller
     {
         $text = $request->input('text');
 
-        if ($request->hasFile('file'))
+        if ($request->hasFile('image'))
         {
             $request->file->storeAs('public', self::FILENAME);
         }
