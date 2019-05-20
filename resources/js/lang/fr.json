@@ -7,6 +7,7 @@
 
   "actions": "Actions",
   "confirm_password": "Confirm Password",
+  "code": "Code",
   "delete_confirm": "Veux-tu vraiment supprimer <b>{0}</b> ?",
   "email": "Email",
   "error_alert_text": "Something went wrong! Please try again.",
@@ -24,6 +25,7 @@
   "page_not_found": "Page introuvable",
   "password_updated": "Your password has been updated!",
   "password": "Mot de passe",
+  "preview": "Prévisualisation",
   "profile": "Profile",
   "register_with": "Register with",
   "register": "Register",
@@ -73,7 +75,11 @@
     },
 
     "biography_section": {
-      "delete": "Supprimer la section"
+      "delete": "Supprimer la section",
+      "help": {
+        "title": "Réaction de la biography"
+
+      }
     },
 
     "title": "Gestion"

@@ -12,16 +12,8 @@ class WelcomeController extends Controller
 
     public function index(Request $request)
     {
-        $text = DB::table('welcome')->pluck('text')->first();
-        return $this->response($text);
-    }
-
-    private function response($text)
-    {
-        return array(
-            'text' => $text,
-            'image' => Storage::url(self::FILENAME)
-        );
+        $data = (array)DB::table('welcome')->first();
+        return array_merge($data, ['image' => Storage::url(self::FILENAME)]);
     }
 
     public function update(Request $request)
@@ -38,8 +30,11 @@ class WelcomeController extends Controller
             //torage::disk('public')->delete(self::FILENAME);
         }
 
-        DB::table('welcome')->update(['text' => $text]);
+        DB::table('welcome')->update([
+            'text' => $text,
+            'updated_at' => DB::raw('date("now")')
+        ]);
 
-        return $this->response($text);
+        return $this->index();
     }
 }

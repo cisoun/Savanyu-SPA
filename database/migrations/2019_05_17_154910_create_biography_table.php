@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBiographySectionsTable extends Migration
+class CreateBiographyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateBiographySectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('biography_sections', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title')->unique();
+        Schema::create('biography', function (Blueprint $table) {
+            $table->string('text');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +26,6 @@ class CreateBiographySectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('biography_sections');
+        Schema::dropIfExists('biography');
     }
 }

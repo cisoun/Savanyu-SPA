@@ -3,27 +3,72 @@
     <div class="card">
       <div class="card-header with-buttons">
         {{ $t('biography') }}
-        <button class="btn btn-primary" @click="store"><fa icon="plus" fixed-width /> {{ $t('section') }}</button>
+        <button class="btn btn-primary" :class="{'btn-loading': busy}" @click="update()"><fa icon="pen" fixed-width /> {{ $t('update') }}</button>
       </div>
-      <div class="card-body">
-        <BiographySection v-for="(section, index) in sections"
-          :key="index"
-          :section="section"
-          @change="onSectionChange"
-          @event-change="onEventChange"
-          @event-create="onEventCreate"
-          @remove="onSectionRemove(section)" />
-      </div>
-    </div>
 
-    <RemoveModal ref="removeModal" v-on:confirm="remove" :title="$t('management.biography_section.delete')" />
+      <div class="card-body">
+        <b-card no-body>
+          <b-tabs card>
+            <b-tab :title="$t('code')">
+              <template slot="title">
+                <fa icon="code" /> {{ $t('code') }}
+              </template>
+              <b-form-textarea
+              rows="20"
+              v-model="text"
+              @keydown.tab.prevent="tabber($event)">
+            </b-form-textarea>
+          </b-tab>
+          <b-tab :title="$t('preview')" v-html="format(text)">
+            <template slot="title">
+              <fa icon="eye" /> {{ $t('preview') }}
+            </template>
+          </b-tab>
+          <b-tab>
+            <template slot="title">
+              <fa icon="question-circle" /> Aide
+            </template>
+            <h3>Aide pour la rédaction</h3>
+            <h5>Section</h5>
+            <p>Le titre d'une section n'a pas de contrainte particulière.</p>
+            <h5>Événement</h5>
+            <p>Un événement s'écrit de la manière suivante :</p>
+            <p>
+              <ul>
+                <li>Année (si plusieurs, séparées par une virgule)</li>
+                <li>Tabulation</li>
+                <li>Titre de lévénement</li>
+              </ul>
+            </p>
+            <h5>Exemple</h5>
+            <p>
+              <b-card class="text-left">
+                <code>
+                  Mes expositions<br><br>
+                  2019<b-badge variant="light">tab</b-badge>Exposition 2019<br>
+                  2001, 2002<b-badge variant="light">tab</b-badge>Expositions
+                </code>
+              </b-card>
+            </p>
+            <p>Ce qui donne :</p>
+            <p>
+              <b-card class="text-left">
+                <div v-html="format(example)"></div>
+              </b-card>
+            </p>
+          </b-tab>
+        </b-tabs>
+      </b-card>
+    </div>
   </div>
+</div>
 </template>
 
 <script>
 import axios from 'axios'
 import Form from 'vform'
 import { mapGetters } from 'vuex'
+import { toTable } from '~/plugins/biography'
 
 export default {
   scrollToTop: false,
@@ -32,79 +77,44 @@ export default {
     return { title: this.$t('biography') }
   },
 
-  computed: {
-    ...mapGetters({
-      artworks: 'artworks/artworks',
-      categories: 'categories/categories'
-    })
-  },
-
   data: () => ({
-    sections: []
+    busy: false,
+    example: 'Mes expositions\n2019\tExposition 2019\n2001, 2002\tExpositions',
+    text: ''
   }),
 
   methods: {
-    async load () {
-      await axios.get('/api/biography/section/index')
-                 .then(response => this.sections = response.data)
-                 .catch(error => console.error(error));
+    format (text) {
+      return toTable(text);
     },
 
-    async remove (section) {
-      await axios.delete(`/api/biography/section/${section.id}`)
-                 .then(response => this.sections.remove(section))
-                 .catch(error => console.error(error));
+    tabber (event) {
+      if (event) {
+        event.preventDefault();
+        let text = event.target.value;
+        let startText = text.slice(0, event.target.selectionStart);
+        let endText = text.slice(event.target.selectionStart);
+        event.target.value = `${startText}\t${endText}`
+        event.target.selectionEnd = event.target.selectionStart + 1
+      }
     },
 
-    async store () {
-      const title = this.generateTitle();
-      const section = { 'title': title };
+    async update () {
+      this.busy = true;
 
-      await axios.post('/api/biography/section/store', section)
-                 .then(response => this.sections.push(response.data))
-                 .catch(error => console.error(error));
+      this.$store.dispatch('biography/update', {
+        text: this.text
+      }).finally(() => this.busy = false);
     },
-
-    generateTitle () {
-      const prefix = 'Section ';
-      let title = prefix;
-      let i = 1;
-
-      do {
-        title = prefix + i++;
-      } while (this.sections.filter(s => s.title == title).length > 0);
-
-      return title;
-    },
-
-    onEventChange (event) {
-
-    },
-
-    async onEventCreate (event) {
-      await this.store();
-      // await axios.post('/api/biography/event/store', event)
-      //            .then(response => event = response.data)
-      //            .catch(error => console.error(error));
-    },
-
-    onSectionChange (property, value) {
-      console.log(property);
-      console.log(value);
-    },
-
-    onSectionRemove (section) {
-      this.$refs.removeModal.show(section.title, section);
-    }
   },
 
   async mounted () {
-    await this.load();
+    await this.$store.dispatch('biography/fetch');
+    this.text = this.$store.state.biography.text;
   }
 }
 </script>
 
 <style scoped>
-.card { margin-bottom: 1em; }
-.card:last-of-type { margin-bottom: unset }
+
 </style>

@@ -22,10 +22,6 @@ export default {
     })
   },
 
-  mounted () {
-    this.$store.dispatch('welcome/fetch');
-  },
-
   methods: {
     format (text) {
       return text.replace(/\*\*([^(?=\*\*)]+)\*\*/gi, '<b>$1</b>')

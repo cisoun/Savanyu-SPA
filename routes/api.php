@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/artworks', 'ArtworkController@index');
+Route::get('/biography', 'BiographyController@index');
 Route::get('/categories', 'CategoryController@index');
 Route::get('/uploads', 'UploadController@index');
 Route::get('/videos', 'VideoController@index');
@@ -26,6 +27,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         return $request->user();
     });
 
+    Route::post('/biography', 'BiographyController@update');
     Route::post('/welcome', 'WelcomeController@update');
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');
@@ -40,26 +42,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::prefix('upload')->group(function () {
         Route::delete('{id}', 'UploadController@destroy')->where('id', '[0-9]+');
-    });
-
-    Route::prefix('biography')->group(function () {
-        Route::prefix('event')->group(function () {
-            Route::get('index', 'BiographyEventController@index');
-            Route::post('store', 'BiographyEventController@store');
-
-            Route::delete('{id}', 'BiographyEventController@destroy')->where('id', '[0-9]+');
-            Route::patch('{id}', 'BiographyEventController@update')->where('id', '[0-9]+');
-            Route::post('{id}', 'BiographyEventController@update')->where('id', '[0-9]+');
-        });
-
-        Route::prefix('section')->group(function () {
-            Route::get('index', 'BiographySectionController@index');
-            Route::post('store', 'BiographySectionController@store');
-
-            Route::delete('{id}', 'BiographySectionController@destroy')->where('id', '[0-9]+');
-            Route::patch('{id}', 'BiographySectionController@update')->where('id', '[0-9]+');
-            Route::post('{id}', 'BiographySectionController@update')->where('id', '[0-9]+');
-        });
     });
 });
 

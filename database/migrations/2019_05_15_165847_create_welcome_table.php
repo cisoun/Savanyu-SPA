@@ -15,11 +15,8 @@ class CreateWelcomeTable extends Migration
     {
         Schema::create('welcome', function (Blueprint $table) {
             $table->string('text')->nullable();
+            $table->timestamps();
         });
-
-        DB::table('welcome')->insert([
-            'text' => null
-        ]);
     }
 
     /**

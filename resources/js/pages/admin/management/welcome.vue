@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header with-buttons">
       {{ $t('welcome') }}
-      <button class="btn btn-primary float-right" :class="{'btn-loading': busy}" @click="save()"><fa icon="save" fixed-width /> {{ $t('save') }}</button>
+      <button class="btn btn-primary float-right" :class="{'btn-loading': busy}" @click="update()"><fa icon="pen" fixed-width /> {{ $t('update') }}</button>
     </div>
     <div class="card-body">
       <form>
@@ -55,13 +55,13 @@ export default {
       this.file = this.$refs.image.files[0];
     },
 
-    async save () {
+    async update () {
       this.busy = true;
 
       this.$store.dispatch('welcome/update', {
         file: this.$refs.image.files[0],
         text: this.text
-      }).then(() => this.busy = false);
+      }).finally(() => this.busy = false);
     }
   }
 }
