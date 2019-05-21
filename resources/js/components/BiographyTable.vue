@@ -45,6 +45,6 @@ table td { padding: 0; }
 table tr td:first-child { padding-right: 2rem; }
 .section {
   font-weight: 400;
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 </style>
