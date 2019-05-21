@@ -17,7 +17,7 @@ class CreateVideosTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('artwork_id');
 
-            $table->string('url', 255)->unique();
+            $table->string('url', 255);
             $table->timestamps();
 
             $table->foreign('artwork_id')

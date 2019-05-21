@@ -76,10 +76,21 @@ class ArtworkController extends Controller
     {
         $artwork = Artwork::find($id);
 
-        if ($artwork->category_id == 4)
+        if ($artwork->category_id >= 3)
         {
             $video = $artwork->video;
-            $video->update(['url' => $request->input('video')]);
+
+            if ($video == null)
+            {
+                $artwork->video()->create([
+                    'artwork_id' => $id,
+                    'url' => $request->input('video')
+                ]);
+            }
+            else
+            {
+                $video->update(['url' => $request->input('video')]);
+            }
         }
 
         return tap($artwork)->update($request->except('id'));
