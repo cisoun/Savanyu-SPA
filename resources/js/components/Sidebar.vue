@@ -8,7 +8,7 @@
         </router-link>
       </li>
     </ul>
-    <router-link :to="{ name: 'bio' }" class="nav-link menu-primary" active-class="active">{{ $t('bio') }}</router-link>
+    <router-link :to="{ name: 'bio' }" class="nav-link menu-primary" active-class="active">Bio</router-link>
     <div class="icons">
       <a href="https://instagram.com/victorsavanyusanchez" target="_blank" class="icon icon-instagram">{{ $t('instagram') }}</a>
       <a href="mailto:mail@savanyu.ch" class="icon icon-contact">{{ $t('contact') }}</a>
