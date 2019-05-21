@@ -1,15 +1,13 @@
 <template>
-<div id="bio" v-html="format(text)">
-</div>
+  <BiographyTable v-bind:text="text" />
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { toTable } from '~/plugins/biography'
 
 export default {
   metaInfo () {
-    return { title: 'Biographie' }
+    return { title: this.$t('biography') }
   },
 
   computed: {
@@ -18,22 +16,8 @@ export default {
     })
   },
 
-  methods: {
-    format (text) {
-      return toTable(text);
-    }
-  },
-
   mounted () {
     this.$store.dispatch('biography/fetch');
   },
 }
 </script>
-
-<style>
-#bio table { border-collapse: collapse; }
-#bio table td {
-  margin: 0;
-  padding: 0;
-}
-</style>

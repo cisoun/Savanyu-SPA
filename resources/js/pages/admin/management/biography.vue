@@ -19,10 +19,11 @@
               @keydown.tab.prevent="tabber($event)">
             </b-form-textarea>
           </b-tab>
-          <b-tab :title="$t('preview')" v-html="format(text)">
+          <b-tab :title="$t('preview')">
             <template slot="title">
               <fa icon="eye" /> {{ $t('preview') }}
             </template>
+            <BiographyTable v-bind:text="text" />
           </b-tab>
           <b-tab>
             <template slot="title">
@@ -36,7 +37,7 @@
             <p>
               <ul>
                 <li>Année (si plusieurs, séparées par une virgule)</li>
-                <li>Tabulation</li>
+                <li>Tabulation (une seulement !)</li>
                 <li>Titre de lévénement</li>
               </ul>
             </p>
@@ -53,7 +54,7 @@
             <p>Ce qui donne :</p>
             <p>
               <b-card class="text-left">
-                <div v-html="format(example)"></div>
+                <div><BiographyTable :text="example" /></div>
               </b-card>
             </p>
           </b-tab>
@@ -68,7 +69,6 @@
 import axios from 'axios'
 import Form from 'vform'
 import { mapGetters } from 'vuex'
-import { toTable } from '~/plugins/biography'
 
 export default {
   scrollToTop: false,
@@ -84,10 +84,6 @@ export default {
   }),
 
   methods: {
-    format (text) {
-      return toTable(text);
-    },
-
     tabber (event) {
       if (event) {
         event.preventDefault();
@@ -114,7 +110,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
