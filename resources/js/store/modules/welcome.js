@@ -15,7 +15,7 @@ export const getters = {
 
 // mutations
 export const mutations = {
-  [types.FETCH_WELCOME_SUCCESS] (state, { data }) {
+  [types.FETCH_WELCOME_SUCCESS] (state, data) {
     state.image = data.image,
     state.text = data.text
   },
@@ -27,7 +27,7 @@ export const actions = {
     try {
       const { data } = await axios.get('/api/welcome')
 
-      commit(types.FETCH_WELCOME_SUCCESS, { data: data })
+      commit(types.FETCH_WELCOME_SUCCESS, data)
     } catch (e) {
       // ...
     }
@@ -38,12 +38,16 @@ export const actions = {
     formData.append('image', data.file);
     formData.append('text', data.text);
 
-    return await axios.post('/api/welcome', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }).then((data) => {
-      commit(types.FETCH_WELCOME_SUCCESS, { data: data })
-    });
+    try {
+      const { data } = await axios.post('/api/welcome', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+
+      commit(types.FETCH_WELCOME_SUCCESS, data)
+    } catch (e) {
+      // ...
+    }
   }
 }

@@ -13,7 +13,7 @@ export const getters = {
 
 // mutations
 export const mutations = {
-  [types.FETCH_BIOGRAPHY_SUCCESS] (state, { data }) {
+  [types.FETCH_BIOGRAPHY_SUCCESS] (state, data) {
     state.text = data.text
   },
 }
@@ -24,16 +24,19 @@ export const actions = {
     try {
       const { data } = await axios.get('/api/biography')
 
-      commit(types.FETCH_BIOGRAPHY_SUCCESS, { data: data })
+      commit(types.FETCH_BIOGRAPHY_SUCCESS, data)
     } catch (e) {
       // ...
     }
   },
 
   async update ({ commit }, text) {
-    return await axios.post('/api/biography', text)
-    .then((data) => {
-      commit(types.FETCH_BIOGRAPHY_SUCCESS, { data: data })
-    });
+    try {
+      const { data } = await axios.post('/api/biography', text)
+
+      commit(types.FETCH_BIOGRAPHY_SUCCESS, data)
+    } catch (e) {
+      // ...
+    }
   }
 }
