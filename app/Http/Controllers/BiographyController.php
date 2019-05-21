@@ -12,7 +12,7 @@ class BiographyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return (array)DB::table('biography')->first();
     }
@@ -33,6 +33,6 @@ class BiographyController extends Controller
             'updated_at' => DB::raw('date("now")')
         ]);
 
-        return $this->index();
+        return $this->index($request);
     }
 }

@@ -35,6 +35,6 @@ class WelcomeController extends Controller
             'updated_at' => DB::raw('date("now")')
         ]);
 
-        return $this->index();
+        return $this->index($request);
     }
 }
