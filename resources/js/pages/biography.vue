@@ -14,10 +14,6 @@ export default {
     ...mapGetters({
       text: 'biography/text'
     })
-  },
-
-  mounted () {
-    this.$store.dispatch('biography/fetch');
-  },
+  }
 }
 </script>
