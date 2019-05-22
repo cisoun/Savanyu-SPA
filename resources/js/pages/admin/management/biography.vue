@@ -3,28 +3,33 @@
     <div class="card">
       <div class="card-header with-buttons">
         {{ $t('biography') }}
-        <button class="btn btn-primary" :class="{'btn-loading': busy}" @click="update()"><fa icon="pen" fixed-width /> {{ $t('update') }}</button>
+        <button class="btn btn-primary" :class="{'btn-loading': busy}" @click="update()">
+          <fa :icon="updated ? 'check' : 'pen'" fixed-width /> {{ $t('update') }}
+        </button>
       </div>
 
       <div class="card-body">
         <b-card no-body>
           <b-tabs card>
+
             <b-tab :title="$t('code')">
               <template slot="title">
                 <fa icon="code" /> {{ $t('code') }}
               </template>
-              <b-form-textarea
-              rows="20"
-              v-model="text"
-              @keydown.tab.prevent="tabber($event)">
-            </b-form-textarea>
-          </b-tab>
+              <b-textarea
+                rows="20"
+                v-model="$store.state.biography.text"
+                @keydown.tab.prevent="tabber($event)">
+              </b-textarea>
+            </b-tab>
+
           <b-tab :title="$t('preview')">
             <template slot="title">
               <fa icon="eye" /> {{ $t('preview') }}
             </template>
-            <BiographyTable v-bind:text="text" />
+            <BiographyTable v-bind:text="$store.state.biography.text" />
           </b-tab>
+
           <b-tab>
             <template slot="title">
               <fa icon="question-circle" /> Aide
@@ -38,7 +43,7 @@
               <ul>
                 <li>Année (si plusieurs, séparées par une virgule)</li>
                 <li>Tabulation (une seulement !)</li>
-                <li>Titre de lévénement</li>
+                <li>Titre de l'événement</li>
               </ul>
             </p>
             <h5>Exemple</h5>
@@ -58,6 +63,7 @@
               </b-card>
             </p>
           </b-tab>
+
         </b-tabs>
       </b-card>
     </div>
@@ -80,7 +86,8 @@ export default {
   data: () => ({
     busy: false,
     example: 'Mes expositions\n2019\tExposition 2019\n2001, 2002\tExpositions',
-    text: ''
+    text: '',
+    updated: false,
   }),
 
   methods: {
@@ -98,15 +105,13 @@ export default {
     async update () {
       this.busy = true;
 
-      this.$store.dispatch('biography/update', {
-        text: this.text
-      }).finally(() => this.busy = false);
+      await this.$store.dispatch('biography/update', {
+        text: this.$store.state.biography.text
+      })
+      .then(() => this.updated = true)
+      .catch(() => this.updated = false)
+      .finally(() => this.busy = false );
     },
-  },
-
-  async mounted () {
-    await this.$store.dispatch('biography/fetch');
-    this.text = this.$store.state.biography.text;
   }
 }
 </script>

@@ -2,7 +2,9 @@
   <div class="card">
     <div class="card-header with-buttons">
       {{ $t('welcome') }}
-      <button class="btn btn-primary float-right" :class="{'btn-loading': busy}" @click="update()"><fa icon="pen" fixed-width /> {{ $t('update') }}</button>
+      <button class="btn btn-primary float-right" :class="{'btn-loading': busy}" @click="update()">
+        <fa :icon="updated ? 'check' : 'pen'" fixed-width /> {{ $t('update') }}
+      </button>
     </div>
     <div class="card-body">
       <form>
@@ -15,7 +17,7 @@
         </div>
         <div class="form-group">
           <label for="text">{{ $t('text') }}</label>
-          <textarea ref="text" id="text" class="form-control" rows="5" v-model="text"></textarea>
+          <b-textarea id="text" rows="5" v-model="$store.state.welcome.text"></b-textarea>
         </div>
       </form>
     </div>
@@ -42,13 +44,8 @@ export default {
   data: () => ({
     busy: false,
     file: null,
-    text: ''
+    updated: false,
   }),
-
-  async mounted () {
-    await this.$store.dispatch('welcome/fetch');
-    this.text = this.$store.getters['welcome/text'];
-  },
 
   methods: {
     onFileChange () {
@@ -58,10 +55,13 @@ export default {
     async update () {
       this.busy = true;
 
-      this.$store.dispatch('welcome/update', {
+      await this.$store.dispatch('welcome/update', {
         file: this.$refs.image.files[0],
-        text: this.text
-      }).finally(() => this.busy = false);
+        text: this.$store.state.welcome.text
+      })
+      .then(() => this.updated = true)
+      .catch(() => this.updated = false)
+      .finally(() => this.busy = false);
     }
   }
 }
