@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="(item, index) in photographies" class="row">
+    <div v-for="(item, index) in artworks" class="row artwork">
       <div class="col-6">
         <img :src="getFirstPicture(item)" class="img-fluid" />
       </div>
@@ -23,12 +23,8 @@ export default {
   },
 
   computed: {
-    photographies () {
-      return this.artworks.filter(a => a.category_id == 2);
-    },
-
     ...mapGetters({
-      artworks: 'artworks/artworks',
+      artworks: 'artworks/photographies',
       uploads: 'uploads/uploads'
     })
   },
@@ -48,10 +44,6 @@ export default {
 </script>
 
 <style scoped>
-.row {
-  margin-bottom: 30px;
-}
-
 .diaporama-link {
   color: var(--primary);
   display: block;

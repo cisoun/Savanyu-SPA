@@ -10,6 +10,10 @@ export const state = {
 // getters
 export const getters = {
   artworks: state => state.artworks,
+  paintings: state => state.artworks.filter(a => a.category_id == 1),
+  photographies: state => state.artworks.filter(a => a.category_id == 2),
+  sculptures: state => state.artworks.filter(a => a.category_id == 3),
+  videos: state => state.artworks.filter(a => a.category_id == 4),
 }
 
 // mutations

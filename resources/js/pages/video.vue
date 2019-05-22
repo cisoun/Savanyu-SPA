@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-for="(item, index) in videos" class="text-right">
-      <iframe class="video" :src="getURL(item)" frameborder="0" allowfullscreen></iframe>
+    <div v-for="(item, index) in artworks" class="artwork">
+      <Youtube :src="getVideo(item).url" />
       <div class="title">{{ item.title }}</div>
       {{ item.description }}
     </div>
@@ -16,41 +16,23 @@ export default {
     return { title: this.$t('video') }
   },
 
-  data: () => ({
-    youtubeUrl: 'https://www.youtube.com/embed/'
-  }),
-
   computed: {
-    videos () {
-      return this.artworks.filter(a => a.category_id == 4);
-    },
-
     ...mapGetters({
-      artworks: 'artworks/artworks',
-      videoUrls: 'videos/videos'
+      artworks: 'artworks/videos',
+      videos: 'videos/videos'
     })
   },
 
   methods: {
-    getID (artwork) {
-      const video = this.videoUrls.find(v => v.artwork_id == artwork.id);
-      if (video) {
-        return video.url;
-      }
-      return '';
+    getVideo (artwork) {
+      return this.videos.find(v => v.artwork_id == artwork.id);
     },
-
-    getURL (artwork) {
-      const id = this.getID(artwork);
-      return this.youtubeUrl + id;
-    }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-.video {
-  height: 414px;
-  width: 740px;
+<style scoped>
+.artwork {
+  text-align: right;
 }
 </style>

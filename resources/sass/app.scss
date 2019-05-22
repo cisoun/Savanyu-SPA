@@ -58,3 +58,17 @@ a.active {
   font-weight: 400;
   text-transform: uppercase;
 }
+
+.artwork {
+  margin-bottom: 1rem;
+}
+
+.artwork img,
+.artwork .video   {
+  margin-bottom: 1rem;
+}
+
+.video {
+  height: 414px;
+  width: 740px;
+}
