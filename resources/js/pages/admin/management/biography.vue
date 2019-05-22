@@ -19,7 +19,7 @@
               <b-textarea
                 rows="20"
                 v-model="$store.state.biography.text"
-                @keydown.tab.prevent="tabber($event)">
+                @keydown.tab.prevent="onTabDown($event)">
               </b-textarea>
             </b-tab>
 
@@ -91,14 +91,22 @@ export default {
   }),
 
   methods: {
-    tabber (event) {
+    onTabDown (event) {
       if (event) {
         event.preventDefault();
-        let text = event.target.value;
-        let startText = text.slice(0, event.target.selectionStart);
-        let endText = text.slice(event.target.selectionStart);
-        event.target.value = `${startText}\t${endText}`
-        event.target.selectionEnd = event.target.selectionStart + 1
+        // TODO: In the future, use this.
+        // NOTE: Does not erase undo operations unlike the code below.
+        // NOTE: Not supported by Firefox right now.
+        //       https://bugzilla.mozilla.org/show_bug.cgi?id=1220696
+        //document.execCommand("insertText", false, '\t');
+
+        const position = event.target.selectionStart;
+        const text = event.target.value;
+        const startText = text.slice(0, position);
+        const endText = text.slice(position);
+        event.target.value = `${startText}\t${endText}`;
+        event.target.selectionStart = position + 1;
+        event.target.selectionEnd = position + 1;
       }
     },
 
