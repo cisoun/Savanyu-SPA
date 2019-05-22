@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="(item, index) in artworks" class="artwork">
-      <Youtube :src="getVideo(item).url" />
+      <Youtube :url="getVideo(item).url" />
       <div class="title">{{ item.title }}</div>
       {{ item.description }}
     </div>

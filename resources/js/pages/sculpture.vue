@@ -2,7 +2,7 @@
   <div>
     <div v-for="(item, index) in artworks">
       <!-- Video -->
-      <div v-if="hasVideo(item)" class="row">
+      <div v-if="getVideo(item)" class="row">
         <div class="col-12 text-right">
           <Youtube class="w-100" :url="getVideo(item).url" />
           <div class="title">{{ item.title }}</div>
@@ -56,10 +56,6 @@ export default {
     getVideo (artwork) {
       return this.videos.find(v => v.artwork_id == artwork.id);
     },
-
-    hasVideo (artwork) {
-      return this.getVideo(artwork) != null;
-    }
   }
 }
 </script>

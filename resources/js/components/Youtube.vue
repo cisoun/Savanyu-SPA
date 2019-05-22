@@ -1,5 +1,5 @@
 <template>
-<iframe class="video" :src="url" frameborder="0" allowfullscreen></iframe>
+<iframe class="video" :src="src" frameborder="0" allowfullscreen></iframe>
 </template>
 
 <script>
@@ -7,12 +7,12 @@ export default {
   name: 'Youtube',
 
   props: {
-    id: { type: String, default: '' },
+    url: { type: String, default: '' },
   },
 
   computed: {
-    url () {
-      return 'https://www.youtube.com/embed/' + this.id;
+    src () {
+      return 'https://www.youtube.com/embed/' + this.url;
     }
   }
 }
