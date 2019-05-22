@@ -1,27 +1,35 @@
 @font-face {
-    font-family: 'DIN Pro';
-    src: url('../fonts/dinpro-light.otf') format('truetype');
-    font-weight: 100;
-    font-style: normal;
+  font-display: auto;
+  font-family: 'DIN Pro';
+  font-style: normal;
+  font-weight: 100;
+  src: local('DIN Pro Light'),
+       url('/fonts/dinpro-light.otf') format('truetype');
 }
 
 @font-face {
-    font-family: 'DIN Pro';
-    src: url('../fonts/dinpro-regular.otf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
+  font-display: auto;
+  font-family: 'DIN Pro';
+  font-style: normal;
+  font-weight: 300;
+  src: local('DIN Pro Regular'),
+       url('/fonts/dinpro-regular.otf') format('truetype');
 }
 
 @font-face {
-    font-family: 'DIN Pro';
-    src: url('../fonts/dinpro-medium.otf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
+  font-display: auto;
+  font-family: 'DIN Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('DIN Pro Medium'),
+       url('/fonts/dinpro-medium.otf') format('truetype');
 }
 
 @font-face {
-    font-family: 'DIN Pro';
-    src: url('../fonts/dinpro-black.otf') format('truetype');
-    font-weight: 700;
-    font-style: normal;
+  font-display: auto;
+  font-family: 'DIN Pro';
+  font-style: normal;
+  font-weight: 700;
+  src: local('DIN Pro Black'),
+       url('/fonts/dinpro-black.otf') format('truetype');
 }

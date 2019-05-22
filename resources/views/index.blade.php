@@ -26,6 +26,10 @@ $polyfills = [
 
   <title>{{ config('app.name') }}</title>
 
+  <link rel="preload" href="../fonts/dinpro-light.otf" as="font" />
+  <link rel="preload" href="../fonts/dinpro-regular.otf" as="font" />
+  <link rel="preload" href="../fonts/dinpro-medium.otf" as="font" />
+  <link rel="preload" href="../fonts/dinpro-black.otf" as="font" />
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
 <body>
