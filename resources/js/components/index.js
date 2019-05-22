@@ -2,9 +2,6 @@ import Vue from 'vue'
 
 import ArtworkModal from './admin/ArtworkModal'
 import RemoveModal from './admin/RemoveModal'
-import Editable from './admin/Editable'
-import EditableText from './admin/EditableText'
-import EditableTextArea from './admin/EditableTextArea'
 
 import BiographyTable from './BiographyTable'
 
@@ -26,9 +23,6 @@ import { HasError, AlertError, AlertSuccess } from 'vform'
   Card,
   Checkbox,
   Child,
-  Editable,
-  EditableText,
-  EditableTextArea,
   HasError,
   Popup,
   RemoveModal,
