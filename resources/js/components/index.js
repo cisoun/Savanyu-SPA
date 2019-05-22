@@ -1,9 +1,9 @@
 import Vue from 'vue'
 
 import ArtworkModal from './admin/ArtworkModal'
-import RemoveModal from './admin/RemoveModal'
-
 import BiographyTable from './BiographyTable'
+import RemoveModal from './admin/RemoveModal'
+import Youtube from './Youtube'
 
 import Button from './Button'
 import Card from './Card'
@@ -26,7 +26,8 @@ import { HasError, AlertError, AlertSuccess } from 'vform'
   HasError,
   Popup,
   RemoveModal,
-  Sidebar
+  Sidebar,
+  Youtube
 ].forEach(Component => {
   Vue.component(Component.name, Component)
 })
