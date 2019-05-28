@@ -45,6 +45,6 @@
     "eslint-plugin-vue": "^5.2.2",
     "laravel-mix": "^2.1.14",
     "vue-template-compiler": "^2.6.10",
-    "webpack-bundle-analyzer": "^2.11.2"
+    "webpack-bundle-analyzer": "^3.3.2"
   }
 }
