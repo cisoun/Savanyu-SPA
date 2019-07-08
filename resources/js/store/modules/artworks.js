@@ -79,6 +79,11 @@ export const actions = {
   },
 
   async update ({ commit }, artwork) {
+    // Don't send video if not necessary.
+    if (artwork.category_id < 3) {
+      delete artwork.video;
+    }
+
     const params = {
       transformRequest: [function (data, headers) {
         return objectToFormData(data)
