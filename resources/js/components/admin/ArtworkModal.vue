@@ -3,7 +3,7 @@
            :title="$t(isNew ? 'management.artworks.add' : 'management.artworks.edit')"
            :cancel-title="$t('cancel')"
            :ok-title="$t('save')"
-           :ok-variant="`primary${form.busy ? ' btn-loading' : ''}`"
+           :ok-variant="`primary${busy ? ' btn-loading' : ''}`"
            @ok.prevent="save()"
            size="lg">
     <form @submit.prevent="save()" @keydown="form.onKeydown($event)">
@@ -105,6 +105,7 @@ export default {
   },
 
   data: () => ({
+    busy: false,
     //files: [],
     form: new Form({
       id: 0,
@@ -164,25 +165,29 @@ export default {
     },
 
     async save () {
-      if (this.isNew) {
-        await this.store();
-      } else {
-        await this.update();
+      this.busy = true;
+
+      try {
+        if (this.isNew) {
+          await this.store();
+        } else {
+          await this.update();
+        }
+
+        this.$refs.modal.hide();
+      } catch (e) {
+        showErrorsForForm(e, this.form);
+      } finally {
+        this.busy = false;
       }
     },
 
     async store () {
       await this.$store.dispatch('artworks/store', this.form.data());
-      this.$refs.modal.hide();
     },
 
     async update () {
-      try {
-        await this.$store.dispatch('artworks/update', this.form.data());
-        this.$refs.modal.hide()
-      } catch (e) {
-        showErrorsForForm(e, this.form);
-      }
+      await this.$store.dispatch('artworks/update', this.form.data());
     },
 
     show () {
