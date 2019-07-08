@@ -52,7 +52,6 @@
   "welcome": "Page d'accueil",
 
   "title": "Titre",
-  "description": "Description",
   "text": "Texte",
   "category": "Catégorie",
 
@@ -62,7 +61,6 @@
   "management": {
     "artworks": {
       "add": "Ajouter une oeuvre",
-      "description": "Description de l'oeuvre",
       "text": "Texte d'accompagnement...",
       "title": "Titre de l'oeuvre",
       "choose_files": "Choisissez les fichiers...",

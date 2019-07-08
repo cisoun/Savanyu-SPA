@@ -13,11 +13,6 @@
         <has-error :form="form" field="title"/>
       </div>
       <div class="form-group">
-        <label for="description">{{ $t('description') }}</label>
-        <input v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" type="text" class="form-control" id="description" :placeholder="$t('management.artworks.description')">
-        <has-error :form="form" field="description"/>
-      </div>
-      <div class="form-group">
         <label for="text">{{ $t('text') }}</label>
         <textarea v-model="form.text" :class="{ 'is-invalid': form.errors.has('text') }" class="form-control" id="text" rows="3" :placeholder="$t('management.artworks.text')">{{ form.text }}</textarea>
         <has-error :form="form" field="text"/>
@@ -114,7 +109,6 @@ export default {
     form: new Form({
       id: 0,
       title: '',
-      description: '',
       text: '',
       category_id: 1,
       files: [],
@@ -130,7 +124,6 @@ export default {
     edit (artwork) {
       this.form.id = artwork.id;
       this.form.title = artwork.title;
-      this.form.description = artwork.description || '';
       this.form.text = artwork.text || '';
       this.form.category_id = artwork.category_id;
       this.form.files = artwork.files;

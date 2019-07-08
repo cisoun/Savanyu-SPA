@@ -15,7 +15,6 @@ class Artwork extends Model
         'category_id',
         'title',
         'name',
-        'description',
         'text',
     ];
 

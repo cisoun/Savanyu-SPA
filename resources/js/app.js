@@ -3,10 +3,12 @@ import store from '~/store'
 import router from '~/router'
 import i18n from '~/plugins/i18n'
 import BootstrapVue from 'bootstrap-vue'
+//import Sortable from 'vue-sortable'
 import App from '~/components/App'
 
 import '~/plugins'
 import '~/components'
+
 
 Vue.config.productionTip = false
 
@@ -19,3 +21,4 @@ new Vue({
 })
 
 Vue.use(BootstrapVue);
+//Vue.use(Sortable)

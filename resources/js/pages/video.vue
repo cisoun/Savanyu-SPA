@@ -3,7 +3,7 @@
     <div v-for="(item, index) in artworks" class="artwork">
       <Youtube :url="getVideo(item).url" />
       <div class="title">{{ item.title }}</div>
-      {{ item.description }}
+      {{ item.text }}
     </div>
   </div>
 </template>

@@ -5,14 +5,14 @@
         <a class="artwork" v-for="(item, index) in columns[0]" href="#" @click="$parent.$parent.$emit('popup', item)">
           <img :src="getFirstPicture(item)" />
           <div class="title">{{ item.title }}</div>
-          {{ item.description }}
+          {{ item.text }}
         </a>
       </div>
       <div class="col-6 p-0 pl-2">
         <a class="artwork" v-for="(item, index) in columns[1]" href="#" @click="$parent.$parent.$emit('popup', item)">
           <img :src="getFirstPicture(item)" />
           <div class="title">{{ item.title }}</div>
-          {{ item.description }}
+          {{ item.text }}
         </a>
       </div>
     </div>
