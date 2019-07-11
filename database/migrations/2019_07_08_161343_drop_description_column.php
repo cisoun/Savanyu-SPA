@@ -14,8 +14,8 @@ class DropDescriptionColumn extends Migration
      */
     public function up()
     {
-        // Transfert to 'text'.
-        DB::table('artworks')->update(['text' => DB::raw('description')]);
+        // Transfert 'description' to 'text'.
+        DB::update("update artworks set text = description where text is null;");
 
         // Disable foreign key constraints so we don't lose uploads.
         Schema::disableForeignKeyConstraints();
