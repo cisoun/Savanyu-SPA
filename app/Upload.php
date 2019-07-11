@@ -14,7 +14,6 @@ class Upload extends Model
      */
     protected $fillable = [
         'artwork_id',
-        //'type',
         'path',
     ];
 
@@ -37,17 +36,28 @@ class Upload extends Model
      *
      * @var array
      */
-    protected $appends = ['url'];
+    protected $appends = ['url', 'thumbnail_url'];
 
     /**
-     * Get the user's first name.
+     * Get the upload's thumbnail's URL.
      *
      * @param  string  $value
      * @return string
      */
-    public function getURLAttribute($value)
+    public function getThumbnailURLAttribute()
     {
-        return Storage::url($this->path);
+        return Storage::url('public/min/' . $this->path);
+    }
+
+    /**
+     * Get the upload's URL.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getURLAttribute()
+    {
+        return Storage::url('public/' . $this->path);
     }
 
     /**

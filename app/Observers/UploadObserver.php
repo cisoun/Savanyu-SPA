@@ -48,7 +48,8 @@ class UploadObserver
      */
     public function deleting(Upload $upload)
     {
-        Storage::delete($upload->path);
+        Storage::delete('public/' . $upload->path);
+        Storage::delete('public/min/' . $upload->path);
     }
 
     /**

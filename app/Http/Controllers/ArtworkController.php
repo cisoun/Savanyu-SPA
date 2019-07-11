@@ -8,6 +8,9 @@ use App\Http\Requests\ArtworkRequest;
 use App\Artwork;
 use App\Upload;
 use App\Video;
+use Image;
+
+use Illuminate\Support\Facades\Storage;
 
 class ArtworkController extends Controller
 {
@@ -40,7 +43,9 @@ class ArtworkController extends Controller
         {
             foreach ($request->file('files') as $key => $file)
             {
-                $upload = new Upload(['path' => $file->store('public')]);
+                $name = $file->hashName();
+                Image::make($file)->fit(50, 50)->save(storage_path() . '/min/' . $name);
+                $upload = new Upload(['path' => $file->storeAs('public', $name)]);
                 $artwork->uploads()->save($upload);
             }
         }
@@ -75,6 +80,20 @@ class ArtworkController extends Controller
     public function update(ArtworkRequest $request, $id)
     {
         $artwork = Artwork::find($id);
+
+        $isVideo = $request->category_id == 4;
+
+        if (!$isVideo)
+        {
+            foreach ($request->file('files') as $key => $file)
+            {
+                $name = $file->hashName();
+                Image::make($file)->fit(50, 50)->save(public_path() . '/storage/min/' . $name);
+                $file->storeAs('public', $name);
+                $upload = new Upload(['path' => $name]);
+                $artwork->uploads()->save($upload);
+            }
+        }
 
         if ($artwork->category_id >= 3)
         {

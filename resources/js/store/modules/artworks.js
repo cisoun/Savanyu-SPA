@@ -69,13 +69,9 @@ export const actions = {
       headers: { 'Content-Type': 'multipart/form-data' }
     };
 
-    try {
-      const { data } = await axios.post('/api/artwork/store', artwork, params);
+    const { data } = await axios.post('/api/artwork/store', artwork, params);
 
-      commit(types.STORE_ARTWORK_SUCCESS, data)
-    } catch (e) {
-      console.error(e);
-    }
+    commit(types.STORE_ARTWORK_SUCCESS, data)
   },
 
   async update ({ commit }, artwork) {

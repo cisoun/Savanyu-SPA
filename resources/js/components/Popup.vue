@@ -7,7 +7,7 @@
       <div :class="{'d-none': !showThumbnails}">
         <a class="popup-left-arrow" :class="{invisible: !showLeftArrow}" href="#" @click.stop="scrollLeft()"></a>
         <div class="popup-thumbnails" ref="thumbnails" @scroll="updateArrows()">
-          <img v-for="image in images" :src="image.url" @mouseover="showImage(image)" />
+          <img v-for="image in images" :src="image.thumbnail_url" @mouseover="showImage(image)" />
         </div>
         <a class="popup-right-arrow" :class="{invisible: !showRightArrow}" href="#" @click.stop="scrollRight()"></a>
       </div>
@@ -56,6 +56,7 @@ export default {
     },
 
     show (artwork) {
+      this.$refs.thumbnails.scrollLeft = 0;
       this.images = this.uploads.filter(upload => upload.artwork_id == artwork.id);
 
       if (this.images.length > 0) {
