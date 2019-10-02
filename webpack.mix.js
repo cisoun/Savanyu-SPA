@@ -46,10 +46,10 @@ mix.then(() => {
 function publishAseets () {
   const publicDir = path.resolve(__dirname, './public')
 
-  if (mix.inProduction()) {
+  /*if (mix.inProduction()) {
     fs.removeSync(path.join(publicDir, 'dist'))
-  }
+  }*/
 
-  fs.copySync(path.join(publicDir, 'build', 'dist'), path.join(publicDir, 'dist'))
+  fs.copySync(path.join(publicDir, 'build'), path.join(publicDir))
   fs.removeSync(path.join(publicDir, 'build'))
 }
