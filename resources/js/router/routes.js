@@ -19,6 +19,7 @@ const Painting = () => import('~/pages/painting').then(m => m.default || m)
 const Photography = () => import('~/pages/photography').then(m => m.default || m)
 const Sculpture = () => import('~/pages/sculpture').then(m => m.default || m)
 const Video = () => import('~/pages/video').then(m => m.default || m)
+const Manifest = () => import('~/pages/manifest').then(m => m.default || m)
 const Biography = () => import('~/pages/biography').then(m => m.default || m)
 const NotFound = () => import('~/pages/errors/404').then(m => m.default || m)
 
@@ -37,6 +38,7 @@ export default [
       { path: 'video', name: 'artworks.video', component: Video },
     ]
   },
+  { path: '/manifest', name: 'manifest', component: Manifest },
   { path: '/bio', name: 'bio', component: Biography },
 
   { path: '/admin', redirect: { name: 'admin.management.artworks' } },
