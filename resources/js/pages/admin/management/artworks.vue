@@ -3,28 +3,27 @@
     <div class="card">
       <div class="card-header with-buttons">
         {{ $t('artworks') }}
-        <button class="btn btn-primary float-right" @click="add()"><fa icon="plus" fixed-width /> Ajouter</button>
+        <button class="btn btn-primary float-right" @click="add()"><fa icon="plus" fixed-width /> {{ $t('add') }}</button>
       </div>
       <div class="card-body">
         <b-table :fields="fields" :items="artworks" striped>
 
-          <template slot="HEAD_title" slot-scope="data">{{ $t(data.label) }}</template>
-          <template slot="HEAD_category_id" slot-scope="data">{{ $t(data.label) }}</template>
-          <template slot="HEAD_actions" slot-scope="data">{{ $t(data.label) }}</template>
+          <!-- Header -->
+          <template v-slot:head(title)="data">{{ $t(data.label) }}</template>
+          <template v-slot:head(category_id)="data">{{ $t(data.label) }}</template>
+          <template v-slot:head(actions)="data">{{ $t(data.label) }}</template>
 
-          <template slot="id" slot-scope="data">
+          <!-- Body -->
+          <template v-slot:cell(id)="data">
             {{ data.item.id }}
           </template>
-
-          <template slot="title" slot-scope="data">
+          <template v-slot:cell(title)="data">
             {{ data.item.title }}
           </template>
-
-          <template slot="category_id" slot-scope="data">
+          <template v-slot:cell(category_id)="data">
             {{ $t(nameOfCategory(data.value)) }}
           </template>
-
-          <template slot="actions" slot-scope="data">
+          <template v-slot:cell(actions)="data">
             <a href="#" @click="edit(data.item)"><fa icon="edit" /></a>
             <a href="#" @click="askToRemove(data.item)"><fa icon="times" /></a>
           </template>
@@ -45,6 +44,7 @@ import Form from 'vform'
 import { mapGetters } from 'vuex'
 
 export default {
+  middleware: 'auth',
   scrollToTop: false,
 
   metaInfo () {
