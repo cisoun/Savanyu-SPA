@@ -41,7 +41,7 @@ export default [
   { path: '/manifest', name: 'manifest', component: Manifest },
   { path: '/bio', name: 'bio', component: Biography },
 
-  { path: '/admin', redirect: { name: 'admin.management.artworks' } },
+  { path: '/admin', name: 'admin', redirect: { name: 'admin.management.artworks' } },
   { path: '/admin/login', name: 'admin.login', component: AdminAuthLogin },
   { path: '/admin/password/reset', name: 'admin.password.request', component: AdminAuthPasswordEmail },
   { path: '/admin/password/reset/:token', name: 'admin.password.reset', component: AdminAuthPasswordReset },
@@ -65,5 +65,6 @@ export default [
     ]
   },
 
-  { path: '*', component: NotFound }
+  { path: '*', redirect: { name: 'artworks' } },
+  { path: '/admin/*', redirect: { name: 'admin.login' } }
 ]
