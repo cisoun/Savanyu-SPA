@@ -6,7 +6,7 @@
         <div class="col-12 text-right">
           <Youtube class="w-100" :url="getVideo(item).url" />
           <div class="title">{{ item.title }}</div>
-          {{ item.text }}
+          <div v-html="toHTML(item.text)"></div>
         </div>
       </div>
 
@@ -17,7 +17,7 @@
         </div>
         <div class="col-6">
           <div class="title">{{ item.title }}</div>
-          {{ item.text }}
+          <div v-html="toHTML(item.text)"></div>
           <a href="#" class="diaporama-link" @click="$parent.$parent.$emit('popup', item)"><fa icon="arrow-right" class="fa-" /> Agrandir <fa icon="arrow-left" /></a>
         </div>
       </div>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { toHTML } from '~/plugins/helpers'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -55,6 +56,10 @@ export default {
 
     getVideo (artwork) {
       return this.videos.find(v => v.artwork_id == artwork.id);
+    },
+
+    toHTML (text) {
+      return toHTML(text);
     },
   }
 }

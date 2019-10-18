@@ -3,12 +3,13 @@
     <div v-for="(item, index) in artworks" class="artwork">
       <Youtube :url="getVideo(item).url" />
       <div class="title">{{ item.title }}</div>
-      {{ item.text }}
+      <div v-html="toHTML(item.text)"></div>
     </div>
   </div>
 </template>
 
 <script>
+import { toHTML } from '~/plugins/helpers'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -26,6 +27,10 @@ export default {
   methods: {
     getVideo (artwork) {
       return this.videos.find(v => v.artwork_id == artwork.id);
+    },
+
+    toHTML (text) {
+      return toHTML(text);
     },
   }
 }

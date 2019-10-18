@@ -6,7 +6,7 @@
       </div>
       <div class="col-6">
         <div class="title">{{ item.title }}</div>
-        {{ item.text }}
+        <div v-html="toHTML(item.text)"></div>
         <a href="#" class="diaporama-link" @click="$parent.$parent.$emit('popup', item)"><fa icon="arrow-right" class="fa-" /> Diaporama <fa icon="arrow-left" /></a>
       </div>
     </div>
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { toHTML } from '~/plugins/helpers'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -39,6 +40,10 @@ export default {
 
       return '';
     },
+
+    toHTML (text) {
+      return toHTML(text);
+    }
   }
 }
 </script>
