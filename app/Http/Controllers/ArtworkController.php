@@ -21,7 +21,7 @@ class ArtworkController extends Controller
      */
     public function index()
     {
-        return Artwork::all();
+        return Artwork::orderBy('id', 'desc')->get();
     }
 
     /**
