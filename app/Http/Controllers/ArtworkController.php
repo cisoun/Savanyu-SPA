@@ -38,15 +38,13 @@ class ArtworkController extends Controller
         $artwork = Artwork::create($request->all());
 
         $isVideo = $request->category_id == 4;
+        $hasFiles = $request->has('files');
 
-        if (!$isVideo)
+        if (!$isVideo && $hasFiles)
         {
             foreach ($request->file('files') as $key => $file)
             {
-                $name = $file->hashName();
-                Image::make($file)->fit(50, 50)->save(storage_path() . '/min/' . $name);
-                $upload = new Upload(['path' => $file->storeAs('public', $name)]);
-                $artwork->uploads()->save($upload);
+                $this->storeFile($artwork, $file);
             }
         }
 
@@ -82,16 +80,13 @@ class ArtworkController extends Controller
         $artwork = Artwork::find($id);
 
         $isVideo = $request->category_id == 4;
+        $hasFiles = $request->has('files');
 
-        if (!$isVideo)
+        if (!$isVideo && $hasFiles)
         {
             foreach ($request->file('files') as $key => $file)
             {
-                $name = $file->hashName();
-                Image::make($file)->fit(50, 50)->save(public_path() . '/storage/min/' . $name);
-                $file->storeAs('public', $name);
-                $upload = new Upload(['path' => $name]);
-                $artwork->uploads()->save($upload);
+                $this->storeFile($artwork, $file);
             }
         }
 
@@ -132,5 +127,14 @@ class ArtworkController extends Controller
         }
 
         $artwork->delete();
+    }
+
+    private function storeFile($artwork, $file)
+    {
+        $name = $file->hashName();
+        Image::make($file)->fit(50, 50)->save(public_path() . '/storage/min/' . $name);
+        $file->storeAs('public', $name);
+        $upload = new Upload(['path' => $name]);
+        $artwork->uploads()->save($upload);
     }
 }

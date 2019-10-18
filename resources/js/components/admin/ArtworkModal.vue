@@ -127,9 +127,8 @@ export default {
       this.form.title = artwork.title;
       this.form.text = artwork.text || '';
       this.form.category_id = artwork.category_id;
-      this.form.files = artwork.files;
+      this.form.files = artwork.files || [];
       this.form.video = '';
-
 
       const video = this.videos.find(v => v.artwork_id == artwork.id);
       if (video) {
@@ -173,6 +172,9 @@ export default {
         } else {
           await this.update();
         }
+
+        // Reload uploads.
+        await this.$store.dispatch('uploads/fetch');
 
         this.$refs.modal.hide();
       } catch (e) {
