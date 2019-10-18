@@ -18,36 +18,18 @@ function isDate (value) {
   return value instanceof Date
 }
 
-function objectToFormData (obj, fd, pre) {
-  fd = fd || new FormData();
-
-  if (isUndefined(obj)) {
-    return fd
-  } else if (isArray(obj)) {
-    obj.forEach(function (value) {
-      var key = pre + '[]';
-
-      objectToFormData(value, fd, key);
-    });
-  } else if (isObject(obj) && !isFile(obj) && !isDate(obj)) {
-    Object.keys(obj).forEach(function (prop) {
-      var value = obj[prop];
-
-      if (isArray(value)) {
-        while (prop.length > 2 && prop.lastIndexOf('[]') === prop.length - 2) {
-          prop = prop.substring(0, prop.length - 2);
-        }
-      }
-
-      var key = pre ? (pre + '[' + prop + ']') : prop;
-
-      objectToFormData(value, fd, key);
-    });
-  } else {
-    fd.append(pre, obj);
-  }
-
-  return fd
+function objectToFormData (object) {
+  const formData = new FormData();
+  Object.keys(object).forEach((key) => {
+    let item = object[key];
+    if (isArray(item)) {
+      const k = key + '[]';
+      item.forEach(i => { formData.append(k, i); })
+    } else {
+      formData.append(key, item);
+    }
+  });
+  return formData;
 }
 
 function showErrorsForForm(errors, form) {
