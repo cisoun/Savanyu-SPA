@@ -71,8 +71,3 @@ String.prototype.format = function (args) {
 String.prototype.isNullOrWhiteSpace = function () {
   return !(this && this.trim().length > 0);
 }
-
-
-export function toHTML (text) {
-  return text.replace(/\r\n/g, '<br/>');
-}

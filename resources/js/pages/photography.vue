@@ -6,7 +6,7 @@
       </div>
       <div class="col-6">
         <div class="title">{{ item.title }}</div>
-        <div v-html="toHTML(item.text)"></div>
+        <div v-html="fastmd(item.text)"></div>
         <a href="#" class="diaporama-link" @click="$parent.$parent.$emit('popup', item)"><fa icon="arrow-right" class="fa-" /> Diaporama <fa icon="arrow-left" /></a>
       </div>
     </div>
@@ -15,10 +15,11 @@
 </template>
 
 <script>
-import { toHTML } from '~/plugins/helpers'
+import { mixins } from '~/plugins/index'
 import { mapGetters } from 'vuex'
 
 export default {
+  mixins: [mixins],
   metaInfo () {
     return { title: this.$t('photography') }
   },
@@ -40,10 +41,6 @@ export default {
 
       return '';
     },
-
-    toHTML (text) {
-      return toHTML(text);
-    }
   }
 }
 </script>

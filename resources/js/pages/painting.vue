@@ -5,14 +5,14 @@
         <a class="artwork" v-for="(item, index) in columns[0]" href="#" @click="$parent.$parent.$emit('popup', item)">
           <img :src="getFirstPicture(item)" />
           <div class="title">{{ item.title }}</div>
-          <div v-html="toHTML(item.text)"></div>
+          <div v-html="fastmd(item.text)"></div>
         </a>
       </div>
       <div class="col-6 p-0 pl-2">
         <a class="artwork" v-for="(item, index) in columns[1]" href="#" @click="$parent.$parent.$emit('popup', item)">
           <img :src="getFirstPicture(item)" />
           <div class="title">{{ item.title }}</div>
-          <div v-html="toHTML(item.text)"></div>
+          <div v-html="fastmd(item.text)"></div>
         </a>
       </div>
     </div>
@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import { toHTML } from '~/plugins/helpers'
+import { mixins } from '~/plugins/index'
 import { mapGetters } from 'vuex'
 
 export default {
-
+  mixins: [mixins],
   metaInfo () {
     return { title: this.$t('painting') }
   },
@@ -54,10 +54,6 @@ export default {
       }
 
       return '';
-    },
-
-    toHTML (text) {
-      return toHTML(text);
     },
   }
 }

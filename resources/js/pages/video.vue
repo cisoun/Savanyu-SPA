@@ -3,16 +3,17 @@
     <div v-for="(item, index) in artworks" class="artwork">
       <Youtube :url="getVideo(item).url" />
       <div class="title">{{ item.title }}</div>
-      <div v-html="toHTML(item.text)"></div>
+      <div v-html="fastmd(item.text)"></div>
     </div>
   </div>
 </template>
 
 <script>
-import { toHTML } from '~/plugins/helpers'
+import { mixins } from '~/plugins/index'
 import { mapGetters } from 'vuex'
 
 export default {
+  mixins: [mixins],
   metaInfo () {
     return { title: this.$t('video') }
   },
@@ -27,10 +28,6 @@ export default {
   methods: {
     getVideo (artwork) {
       return this.videos.find(v => v.artwork_id == artwork.id);
-    },
-
-    toHTML (text) {
-      return toHTML(text);
     },
   }
 }
