@@ -6,7 +6,7 @@
         <div class="col-12 text-right">
           <Youtube class="w-100" :url="getVideo(item).url" />
           <div class="title">{{ item.title }}</div>
-          <div v-html="toHTML(item.text)"></div>
+          <div v-html="fastmd(item.text)"></div>
         </div>
       </div>
 
