@@ -45,7 +45,7 @@ const blockquoteReplacer = function(fullMatch, tagStart, tagContents){
 	return '\n<blockquote>' + tagContents + '</blockquote>';
 }
 const horizontalRuleReplacer = function(fullMatch){
-	return '\n<hr />';
+	return '\n<hr/>';
 }
 const unorderedListReplacer = function(fullMatch){
 	let items = '';
@@ -93,6 +93,6 @@ const rules = [
 ];
 
 export function fastmd (text) {
-	rules.forEach(r => text = r(text));
+	rules.forEach(r => text = r(text || ''));
   return text;
 }
