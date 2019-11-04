@@ -77,12 +77,4 @@ body {
 
 td .svg-inline--fa {
   margin: 0 0.3rem;
-
-  path {
-    fill: $secondary;
-  }
-
-  &.fa-trash path {
-    fill: $danger;
-  }
 }
