@@ -16,6 +16,7 @@ class Artwork extends Model
         'title',
         'name',
         'text',
+        'order',
     ];
 
     /**
