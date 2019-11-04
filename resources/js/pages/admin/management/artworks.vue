@@ -11,6 +11,7 @@
           <!-- Header -->
           <template v-slot:head(title)="data">{{ $t(data.label) }}</template>
           <template v-slot:head(category_id)="data">{{ $t(data.label) }}</template>
+          <template v-slot:head(order)="data">{{ $t(data.label) }}</template>
           <template v-slot:head(actions)="data">{{ $t(data.label) }}</template>
 
           <!-- Body -->
@@ -23,7 +24,11 @@
           <template v-slot:cell(category_id)="data">
             {{ $t(nameOfCategory(data.value)) }}
           </template>
+          <template v-slot:cell(order)="data">
+            {{ data.item.order }}
+          </template>
           <template v-slot:cell(actions)="data">
+            <a href="#" @click="sort(data.item)"><fa icon="sort-amount-up" /></a>
             <a href="#" @click="edit(data.item)"><fa icon="edit" /></a>
             <a href="#" @click="askToRemove(data.item)"><fa icon="times" /></a>
           </template>
@@ -64,6 +69,7 @@ export default {
         { key: 'id', label: '#', sortable: true },
         { key: 'title', label: 'title', sortable: true },
         { key: 'category_id', label: 'category', sortable: true },
+        { key: 'order', label: 'order', sortable: true },
         { key: 'actions', label: 'actions', sortable: false },
       ],
   }),
@@ -93,6 +99,18 @@ export default {
 
     remove (artwork) {
       this.$store.dispatch('artworks/destroy', artwork);
+    },
+
+    async sort (artwork) {
+      // Find artwork in the same category that has the biggest value.
+      const biggest = Math.max.apply(
+        Math, this.artworks.map(function(a) { return a.order; })
+      );
+
+      // Put artwork on top.
+      artwork.order = biggest + 1;
+
+      await this.$store.dispatch('artworks/update', artwork);
     }
   }
 }
