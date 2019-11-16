@@ -10,6 +10,7 @@ use App\Upload;
 use App\Video;
 use Image;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ArtworkController extends Controller
@@ -35,7 +36,20 @@ class ArtworkController extends Controller
         // Retrieve the validated input data...
         $validated = $request->validated();
 
-        $artwork = Artwork::create($request->all());
+        // Compute order.
+        $order = 0;
+        $highest = DB::table('artworks')
+            ->where('category_id', $request->category_id)
+            ->max('order');
+        // If artwork with the highest order in the same category exists, takes
+        // its value and increment it for the new one.
+        if ($highest) {
+            $order = $highest + 1;
+        }
+        $data = $request->all();
+        $data['order'] = $order;
+
+        $artwork = Artwork::create($data);
 
         $isVideo = $request->category_id == 4;
         $hasFiles = $request->has('files');
