@@ -23,6 +23,9 @@ $polyfills = [
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Oeuvres de Victor Savanyu.">
+  <meta name="keywords" content="Victor,Savanyu,oeuvres,peinture,photographie,sculpture,vidéo">
+  <meta name="author" content="Victor Savanyu">
 
   <title>{{ config('app.name') }}</title>
 
