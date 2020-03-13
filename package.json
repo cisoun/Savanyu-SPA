@@ -33,7 +33,7 @@
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
-    "acorn": "^6.3.0",
+    "acorn": "^6.4.1",
     "acorn-jsx": "^5.0.2",
     "ajv": "^6.10.2",
     "ajv-keywords": "^3.4.1",
