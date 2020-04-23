@@ -23,7 +23,7 @@ const Biography = () => import('~/pages/biography').then(m => m.default || m)
 const NotFound = () => import('~/pages/errors/404').then(m => m.default || m)
 
 export default [
-  { path: '/', redirect: { name: 'artworks.welcome' } },
+  { path: '/', redirect: { name: 'artworks.home' } },
 
   { path: '/artworks',
     name: 'artworks',
