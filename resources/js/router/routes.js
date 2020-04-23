@@ -12,7 +12,6 @@ const AdminSettings           = () => import('~/pages/admin/settings/index').the
 const AdminSettingsProfile    = () => import('~/pages/admin/settings/profile').then(m => m.default || m)
 const AdminSettingsPassword   = () => import('~/pages/admin/settings/password').then(m => m.default || m)
 
-const Welcome = () => import('~/pages/welcome').then(m => m.default || m)
 const Home = () => import('~/pages/home').then(m => m.default || m)
 const Works = () => import('~/pages/artworks').then(m => m.default || m)
 const Painting = () => import('~/pages/painting').then(m => m.default || m)
@@ -29,9 +28,9 @@ export default [
   { path: '/artworks',
     name: 'artworks',
     component: Works,
-    redirect: { name: 'artworks.welcome' },
+    redirect: { name: 'artworks.home' },
     children: [
-      { path: '', name: 'artworks.welcome', component: Welcome },
+      { path: '', name: 'artworks.home', component: Home },
       { path: 'painting', name: 'artworks.painting', component: Painting },
       { path: 'photography', name: 'artworks.photography', component: Photography },
       { path: 'sculpture', name: 'artworks.sculpture', component: Sculpture },
