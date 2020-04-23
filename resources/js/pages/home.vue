@@ -9,9 +9,6 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  layout: 'admin',
-  scrollable: 'yess',
-
   metaInfo () {
     return { title: this.$t('home') }
   },

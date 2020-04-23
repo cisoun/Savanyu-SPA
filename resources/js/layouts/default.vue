@@ -6,11 +6,11 @@
           <Sidebar />
         </div>
         <div class="col-9 content">
-          <div ref="scrollable" class="scrollable">
+          <div ref="scrollable" :class="{scrollable: scrollable}">
             <child @popup="showArtwork"/>
           </div>
         </div>
-        <div class="d-none d-sm-block arrows">
+        <div v-if="scrollable" class="d-none d-sm-block arrows">
           <a href="#" class="arrow" @click="scrollTop()"></a>
           <a href="#" class="arrow arrow-down" @click="scrollBottom()"></a>
         </div>
@@ -25,8 +25,15 @@ export default {
   name: 'MainLayout',
 
   data: () => ({
-    blurred: false
+    blurred: false,
+    scrollable: true,
   }),
+
+  mounted () {
+    this.$router.afterEach((to, from) => {
+      this.scrollable = to.name != 'artworks.home';
+    });
+  },
 
   methods: {
     scrollBottom () {
@@ -40,7 +47,7 @@ export default {
     showArtwork (artwork) {
       this.$refs.popup.show(artwork)
     },
-  }
+  },
 }
 </script>
 
