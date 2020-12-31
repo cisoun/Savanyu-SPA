@@ -15,8 +15,6 @@
             <a href="/" class="nav-link"><fa icon="globe" fixed-width /> Retour au site</a>
           </li>
 
-          <locale-dropdown/>
-
           <!-- Authenticated -->
           <li v-if="user" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark"
