@@ -1,7 +1,7 @@
 <template>
-  <div class="text-center">
-    <img v-if="image" :src="`${image}`" alt="Image" />
-    <p v-if="text" class="mt-3" v-html="format(text)"></p>
+  <div class="text-center home">
+    <div v-if="image" class="photo" :style="`background-image: url(${image});`"></div>
+    <p v-if="text" class="text mt-3" v-html="format(text)"></p>
   </div>
 </template>
 
@@ -30,7 +30,16 @@ export default {
 </script>
 
 <style scoped>
-  img {
-    max-height: 700px;
-  }
+.home {
+  display: flex;
+  flex-directIon: column;
+  height: 700px;
+}
+.photo {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  flex: 1 1 auto;
+}
+.text { flex: 0 1 auto; }
 </style>
