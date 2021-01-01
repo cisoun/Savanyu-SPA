@@ -10,6 +10,8 @@
 /public/js
 /public/mix-manifest.json
 /public/storage
+/public/dist
+/public/build
 /storage/*.key
 /vendor
 backup.sh
