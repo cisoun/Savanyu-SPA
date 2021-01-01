@@ -33,7 +33,8 @@ $polyfills = [
   <link rel="preload" href="../fonts/dinpro-regular.otf" as="font" />
   <link rel="preload" href="../fonts/dinpro-medium.otf" as="font" />
   <link rel="preload" href="../fonts/dinpro-black.otf" as="font" />
-  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
+  <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
 </head>
 <body>
   <div id="app"></div>
@@ -45,12 +46,6 @@ $polyfills = [
   <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features={{ implode(',', $polyfills) }}"></script>
 
   {{-- Load the application scripts --}}
-  @if (app()->isLocal())
-    <script src="{{ mix('js/app.js') }}"></script>
-  @else
-    <script src="{{ mix('js/manifest.js') }}"></script>
-    <script src="{{ mix('js/vendor.js') }}"></script>
-    <script src="{{ mix('js/app.js') }}"></script>
-  @endif
+  <script src="{{ mix('dist/js/app.js') }}"></script>
 </body>
 </html>
