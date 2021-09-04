@@ -6,7 +6,7 @@
         <button class="btn btn-primary float-right" @click="add()"><fa icon="plus" fixed-width /> {{ $t('add') }}</button>
       </div>
       <div class="card-body">
-        <b-table :fields="fields" :items="artworks" striped>
+        <b-table :fields="fields" :items="artworks" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" striped>
 
           <!-- Header -->
           <template v-slot:head(title)="data">{{ $t(data.label) }}</template>
@@ -65,13 +65,14 @@ export default {
 
   data: () => ({
     fields: [
-        // A virtual column that doesn't exist in items
-        { key: 'id', label: '#', sortable: true },
-        { key: 'title', label: 'title', sortable: true },
-        { key: 'category_id', label: 'category', sortable: true },
-        { key: 'order', label: 'order', sortable: true },
-        { key: 'actions', label: 'actions', sortable: false },
-      ],
+      { key: 'id', label: '#', sortable: true },
+      { key: 'title', label: 'title', sortable: true },
+      { key: 'category_id', label: 'category', sortable: true },
+      { key: 'order', label: 'order', sortable: true },
+      { key: 'actions', label: 'actions', sortable: false },
+    ],
+    sortBy: 'id',
+    sortDesc: true
   }),
 
   methods: {
