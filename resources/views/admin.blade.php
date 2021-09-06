@@ -38,11 +38,6 @@ $polyfills = [
   <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features={{ implode(',', $polyfills) }}"></script>
 
   {{-- Load the application scripts --}}
-  @if (app()->isLocal())
-    <script src="{{ mix('dist/js/app.js') }}"></script>
-  @else
-    <script src="{{ mix('dist/js/manifest.js') }}"></script>
-    <script src="{{ mix('dist/js/vendor.js') }}"></script>
-  @endif
+  <script src="{{ mix('dist/js/app.js') }}"></script>
 </body>
 </html>
