@@ -36,7 +36,7 @@ export const actions = {
   async update ({ commit }, data) {
     const formData = new FormData();
     formData.append('image', data.file);
-    formData.append('text', data.text);
+    formData.append('text', data.text || '');
 
     try {
       const { data } = await axios.post('/api/welcome', formData, {

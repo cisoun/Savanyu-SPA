@@ -14,7 +14,7 @@
       <a href="https://instagram.com/victorsavanyusanchez" target="_blank" class="icon icon-instagram">{{ $t('instagram') }}</a>
       <a href="mailto:mail@savanyu.ch" class="icon icon-contact">{{ $t('contact') }}</a>
     </div>
-    <a class="menu-primary" href="#">Victor Savanyu</a>
+    <router-link :to="{ name: 'artworks' }" class="menu-primary">Victor Savanyu</router-link>
   </div>
 </template>
 
